@@ -1,0 +1,22 @@
+repository: serhii/dnd-agent2
+commit: 0f9e4b9a548ad394bbb4ed6f4e99a9e68f84f20d
+date: 2026-06-21T15:21:05+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+feat: Spectre.Console chat loop with LLM streaming (#003)
+- Add Spectre.Console CLI with formatted DM output
+- Add LLM client with streaming support (Dnd.Core/Llm)
+- Add DmAgent service for LLM interaction
+- Add DmStreamRenderer for token-by-token display
+- Add ChatHistoryEntry model and chat history tracking
+- Add appsettings.json for LLM configuration
+- Implement /quit, /help, /roll slash commands
+- Remove IInputReader, consolidate input in ConsoleRenderer
+- Update .gitignore to exclude bin/, obj/, .idea/
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
