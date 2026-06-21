@@ -1,0 +1,21 @@
+repository: serhii/dnd-agent2
+commit: 93b76c9c18cb9e7e86c3fc90c8695c4bb53cba7d
+date: 2026-06-21T16:56:53+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+feat: add session persistence with save/load and xUnit tests
+- Dnd.Infrastructure: ISessionPersistence, SessionPersistenceService, SessionData model
+- Dnd.CLI: /save, /load, auto-save on /quit, continue prompt on launch
+- ChatHistoryEntry gains Timestamp field
+- DmAgent exposes GetHistory() and RestoreHistory()
+- InputLoop orchestrates save/load, continues previous session
+- CommandRegistry auto-registers commands via DI constructor
+- Dnd.Infrastructure.Tests: 7 xUnit serialization round-trip tests
+- Remove duplicate player message render after prompt
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
