@@ -1,0 +1,42 @@
+repository: serhii/dnd-agent2
+commit: e3151bf1971bab244621097910c4a32ce1196afd
+date: 2026-08-11T02:13:03+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+fix: repair LLM tool-calling pipeline in the DM agent
+Root cause: the llama.cpp endpoint serves Qwen3 with thinking mode enabled
+by default. The model never emitted structured tool_calls — it wrote its
+tool-call plan into reasoning_content, which the agent pipeline surfaced
+as narration. No tool ever executed, CoT leaked to the player, and the
+model could loop on planning text indefinitely.
+
+Changes:
+- DmAgentFactory: disable Qwen3 thinking via chat_template_kwargs
+  enable_thinking=false (injected through the OpenAI SDK JsonPatch),
+  attach tools/instructions via ChatClientAgentOptions, cap MaxOutputTokens.
+- ChatClientAgentStreamSource: stream sanitized narration live; add a
+  bounded single corrective re-prompt when the model answers with only
+  tool-call planning text (infinite loop impossible).
+- NarrationSanitizer (new): strips think/reasoning blocks, 'Tool: Name(...)'
+  lines, 'I will call ...' announcements, and tool-call JSON from output.
+- PromptBuilder: system prompt now forbids writing tool calls as text and
+  leaking reasoning; per-turn player-language hint (Russian/English).
+- PlayerLanguageDetector (new): detects player language; DmAgent persists
+  it to IGameStateContext.NarrationLanguage so enemy-turn narration
+  (EnemyAIService) follows the same language.
+- ApplyDamageTool: remove the bogus current-combatant turn restriction
+  that rejected player-turn damage to enemies.
+- LlmConfig: MaxOutputTokens (default 1024) prevents runaway generation.
+
+Verified: raw curl tool-calling tests, live end-to-end CLI playtest
+(player attack applied 7-11 damage to enemy HP via the real pipeline,
+Russian narration throughout, no planning/CoT leakage), dotnet build,
+dotnet test (Core 51, DM 230, Infra 19 pass; CLI.Tests 14/15 — the
+pre-existing RunAsync_BasicChatFlow failure is owned by another agent).
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
