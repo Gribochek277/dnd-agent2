@@ -1,0 +1,13 @@
+repository: serhii/dnd-agent2
+commit: 54cf1ed9fe18dc9435256e51c5b70b2c0ecabd13
+date: 2026-08-11T01:38:28+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+fix: import gold and equipment from character JSON
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
