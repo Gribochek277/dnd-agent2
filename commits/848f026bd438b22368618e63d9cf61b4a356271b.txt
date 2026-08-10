@@ -1,0 +1,13 @@
+repository: serhii/dnd-agent2
+commit: 848f026bd438b22368618e63d9cf61b4a356271b
+date: 2026-08-11T02:16:11+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+Merge branch 'fix/llm-toolcalling'
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
