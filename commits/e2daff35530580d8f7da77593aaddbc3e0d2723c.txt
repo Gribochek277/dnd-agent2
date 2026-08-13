@@ -1,0 +1,34 @@
+repository: serhii/dnd-agent2
+commit: e2daff35530580d8f7da77593aaddbc3e0d2723c
+date: 2026-08-14T01:18:41+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+feat: surface deterministic system events (dice rolls & tool calls) before DM narration
+The player now sees the mechanical ground truth — dice, HP changes, DCs, loot,
+gold, XP — as dim system lines rendered before the DM narration streams:
+
+- Add ToolCallEvent and extract FunctionCallContent/FunctionResultContent pairs
+  from update.Contents in ChatClientAgentStreamSource.CollectNarrationAsync
+  (matched by CallId), forwarding each completed tool call via onToolEvent.
+- Thread onToolEvent through ILlmClient.SendPromptStreamingAsync →
+  DmAgent.SendAsync → InputLoop; the enemy turn (EnemyAIService, incl. its own
+  AttackRoll/ApplyDamage resolution events) and GenerateStartingSceneAsync
+  propagate events too.
+- Add IToolEventFormatter/ToolEventFormatter: ApplyDamage→⚔️ −N HP (cur/max),
+  TriggerSave→🎲 спасбросок … d20=… → успех/провал, AssignDC→🎯 СЛ N,
+  StartCombat/EndCombat→⚔️ (EndCombat + «✨ XP» when XP is granted),
+  GrantLoot/SpendGold→💰, Heal→💚; rejected calls render dim as «⚠ … Rejected: …»
+  so they are never shown as an accomplished fact.
+- ConsoleRenderer.RenderToolEvent styles system lines gray (dim for rejected);
+  events fire while the pass is still collected, before any narration token, so
+  the DmStreamRenderer block cursor is never left in front of them.
+- EndCombatTool now computes XpToGrant from defeated enemies and reports
+  «XP granted: N» in its result, so the XP event line is always truthful and the
+  DM-tool combat-end path grants XP consistently with the enemy-turn path.
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
