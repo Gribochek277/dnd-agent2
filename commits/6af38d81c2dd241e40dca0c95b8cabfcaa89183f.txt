@@ -1,0 +1,32 @@
+repository: serhii/dnd-agent2
+commit: 6af38d81c2dd241e40dca0c95b8cabfcaa89183f
+date: 2026-08-14T02:59:33+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+fix(llm): bound DM tool loop and add turn timeout so a rejected tool call cannot hang the turn
+Issue #10: after a rejected tool call (StartCombat accepted, then DeclareEncounter
+-> Rejected: combat is already active) the app hung on the LLM connection
+(0% CPU, ESTAB socket) with no way to finish the turn.
+
+- ChatClientAgentStreamSource: whole-turn timeout (120s default, injectable for
+  tests) aborts an LLM call that never completes and ends the turn with a fallback
+  narrative; a per-pass cap of 8 completed tool calls stops a tool storm and ends
+  the turn with a fallback narrative instead of feeding it back to the model;
+  delivered call ids are deduplicated so the middleware re-emitting accumulated
+  history surfaces each tool result exactly once.
+- DmAgentFactory: provide our own FunctionInvokingChatClient with
+  MaximumIterationsPerRequest = 8 so the agent does not fall back to the default
+  40-iteration middleware loop.
+- Tests: stub agent for the issue #10 scenario (StartCombat + rejected
+  DeclareEncounter -> narration, no hang), tool-call storm -> fallback narrative,
+  turn timeout -> fallback narrative, caller cancellation propagation, bounded
+  middleware, mixed accepted/rejected adjudication.
+
+dotnet build: 0 errors. dotnet test: 500 passed, 0 failed.
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
