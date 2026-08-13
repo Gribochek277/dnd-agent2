@@ -1,0 +1,35 @@
+repository: serhii/dnd-agent2
+commit: 040e53acde7a70abd03d09a1cb0037970b733130
+date: 2026-08-14T01:34:24+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+feat(dnd): add AttackRoll tool so player attacks follow D&D 5e rules
+The player's attacks are now resolved by the system exactly like the enemy AI's:
+d20 + attack bonus vs the target's AC, natural 20 = critical hit (damage dice
+doubled, modifier added once), natural 1 = automatic miss, and the damage dice
+the model names (e.g. 1d8+2) are rolled and applied by the tool — the model no
+longer picks a damage number.
+
+- AttackRollTool: resolves the full attack (PC attack bonus from STR/DEX +
+  proficiency, enemy bonus estimated from CR), applies the damage through
+  CombatState and reports the combined result; absurd/garbage damage
+  expressions fall back to 1d6.
+- Register the tool in DmAgentToolProvider (tracker-wrapped like the rest).
+- Reliability layer: MechanicalOutcomeClaimDetector treats an accepted
+  AttackRoll as authorizing damage/victory narration only when its result
+  actually reports damage dealt (a miss authorizes nothing); the tool is
+  resolving for mandatory enforcement; prompts (system prompt, per-turn
+  reminder, mechanical correction) teach the AttackRoll/ApplyDamage split.
+- ToolEventFormatter renders one AttackRoll event as both «🎲 d20=…» and
+  «⚔️ цель −N HP (cur/max)» when the attack hit, so acceptance criterion 1
+  holds for every attack; the enemy AI's roll event keeps its dice line.
+- NarrationSanitizer strips leaked AttackRoll plan text.
+- Tests: AttackRoll hit/miss/crit/fumble/rejections/clamping, claim-detector
+  authorization (hit vs miss), formatter lines, prompt budget recalibration.
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
