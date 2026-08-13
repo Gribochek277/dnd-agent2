@@ -1,0 +1,17 @@
+repository: serhii/dnd-agent2
+commit: 08dada841d526c3f4a3c3cb2d7f7a9df26fb9266
+date: 2026-08-14T02:33:45+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+docs: add playtest/fix reports and agent plan notes
+- reports/: playtest 2026-08-14 (empty-response bug, combat HP persistence,
+  tool-call gaps) + verification reports from fix/combat-loop and
+  fix/dm-tool-reliability branches
+- .pi/plans/: agent session plan notes
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
