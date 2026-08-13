@@ -1,0 +1,19 @@
+repository: serhii/dnd-agent2
+commit: 343b94580e39336b40d2649f00afd1ac48c8d7ce
+date: 2026-08-14T02:32:16+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+chore: migrate issue tracker from .scratch/ to Gitea
+- remove .scratch/ (local markdown tracker, 19 files) — issues now live
+  on the self-hosted Gitea instance (serhii/dnd-agent2)
+- AGENTS.md: point to Gitea REST API workflow
+- docs/agents/issue-tracker.md: rewrite for Gitea
+- docs/agents/triage-labels.md: labels applied via API, not frontmatter
+- IContextBudgetEstimator.cs: drop stale .scratch/007 reference (PRD #2)
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
