@@ -1,0 +1,23 @@
+repository: serhii/dnd-agent2
+commit: 893937196f543f54056e9115c368742d392e807f
+date: 2026-08-14T00:55:43+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+test: cover LLM compat detector, request customizer and config binding
+ModelCompatDetectorTests: llama.cpp/empty/unknown providers resolve to
+max_tokens + qwen-chat-template; opencode-go/deepseek (provider or URL)
+resolve to deepseek + reasoning replay; Resolve merges explicit overrides.
+OpenAiRequestCustomizerTests: assert the serialized request body shape
+per profile (max_tokens present, max_completion_tokens/store absent,
+chat_template_kwargs.enable_thinking=false for llama.cpp; thinking
+{type} + reasoning_effort for deepseek; sampling params merged).
+LlmConfigBindingTests: env-style keys bind Provider/ApiKey/Reasoning/
+ThinkingLevel/Compat; AddDndCore registers detector/customizer/factory.
+DmAgentFactoryTests: agent builds for both profiles without regression.
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
