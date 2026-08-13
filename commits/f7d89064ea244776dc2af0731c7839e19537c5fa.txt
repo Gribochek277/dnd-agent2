@@ -1,0 +1,21 @@
+repository: serhii/dnd-agent2
+commit: f7d89064ea244776dc2af0731c7839e19537c5fa
+date: 2026-08-14T01:18:39+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+feat: inject empty reasoning_content on DeepSeek tool-call replays
+Add ReasoningContentReplayChatClient middleware (DelegatingChatClient) that stamps
+an empty reasoning_content onto replayed assistant messages carrying tool_calls,
+via ChatMessage.Patch/JsonPatch through RawRepresentation (same mechanism as
+OpenAiRequestCustomizer). Wired in DmAgentFactory through AsAIAgent's clientFactory
+so it sits below FunctionInvokingChatClient and sees every round of the multi-turn
+tool loop. Activates only when the compat profile requires it
+(RequiresReasoningContentOnAssistantMessages — opencode-go/DeepSeek); for
+llama.cpp/Qwen the request passes through untouched. Closes Gitea #7.
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
