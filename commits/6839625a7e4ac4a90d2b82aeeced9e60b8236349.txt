@@ -1,0 +1,32 @@
+repository: serhii/dnd-agent2
+commit: 6839625a7e4ac4a90d2b82aeeced9e60b8236349
+date: 2026-08-14T00:55:43+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+feat: add config-driven LLM compat layer (port of pi openai-completions)
+ModelCompat/ModelCompatDetector resolve the request shape per provider:
+llama.cpp (default profile) -> max_tokens + qwen-chat-template thinking
+(chat_template_kwargs.enable_thinking=false, preserve_thinking=true);
+opencode-go/deepseek -> deepseek thinking (thinking:{type} +
+reasoning_effort) plus reasoning-replay requirements. Explicit Compat
+config overrides the detected defaults.
+
+LlmConfig gains Provider/ApiKey/Reasoning/ThinkingLevel/Compat, bound
+from the LLM section (appsettings + LLM__* env vars). DmAgentFactory
+resolves compat through the detector and hands the request to
+OpenAiRequestCustomizer, which injects body patches via
+RawRepresentationFactory/ChatCompletionOptions.Patch: max_tokens vs
+max_completion_tokens, store opt-out, stream_options.include_usage,
+thinking params by ThinkingFormat and extra sampling params.
+
+RequiresReasoningContentOnAssistantMessages is exposed as an extension
+point for the DeepSeek reasoning-replay middleware (#7); it is not yet
+applied by the agent loop. Default llama.cpp/Qwen behavior unchanged
+(verified live against the llama.cpp endpoint).
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
