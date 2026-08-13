@@ -1,0 +1,24 @@
+repository: serhii/dnd-agent2
+commit: 201ac78106beef636bd972a81ba2dc7e6b102fe7
+date: 2026-08-14T01:16:53+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+feat(llm): enable Qwen thinking for the default llama.cpp profile
+- appsettings: LLM.Reasoning=true -> requests carry
+  chat_template_kwargs.enable_thinking=true (pi qwen-chat-template format)
+- M.E.AI.OpenAI 10.6.0 surfaces reasoning deltas as TextReasoningContent,
+  separate from update.Text, so chain-of-thought never reaches the player
+- Qwen3.6 emits structured tool_calls with thinking on (verified live:
+  tool_calls + reasoning_content on the llama.cpp endpoint; multi-turn
+  replay accepted without reasoning_content on assistant messages)
+- DmAgentFactory: update stale comment (old claim about Qwen3 thinking
+  mode breaking tool-calls no longer applies)
+- test: llama.cpp profile with Reasoning=true emits enable_thinking=true
+  and no reasoning_effort
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
