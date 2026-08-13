@@ -1,0 +1,13 @@
+repository: serhii/dnd-agent2
+commit: f32f563d8b14f4227d4e1d393d9b22c13e305127
+date: 2026-08-14T00:55:43+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+docs: note LLM compat layer in changelog
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
