@@ -1,0 +1,21 @@
+repository: serhii/dnd-agent2
+commit: 1f3e24d0ac0e6458660c27f3c468e9231ad22009
+date: 2026-08-14T02:08:51+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+refactor(dnd): remove player /roll command — dice are DM/system-owned
+Rolls now happen only when the DM calls for them via system tools
+(AssignDC -> TriggerSave, AttackRoll). Players describe intent; they no
+longer have a contextless dice calculator that bypasses the fiction.
+
+- delete RollCommand, RollCommandResult, RollResultDisplay
+- drop DI registration, InputLoop handling, renderer methods
+- remove /roll from /help table and Exploration/Combat prompts
+- remove dice-roll integration test and fake renderer stub
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
