@@ -1,0 +1,29 @@
+repository: serhii/dnd-agent2
+commit: 2720f07ed51c488bf2fa5fbdbdc1d939e0fceaf2
+date: 2026-08-14T02:49:53+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+fix(dnd): retry empty LLM responses, fallback instead of "(empty response)"
+- ChatClientAgentStreamSource: a pass with no narratable content is re-requested
+  with a simplified prompt while the bounded pass budget remains (max 2 retries);
+  when the budget is exhausted — or a tool already ran that pass (re-running
+  could double-apply a state change) — yield the neutral fallback narrative
+  ("Ты оглядываешься — вокруг тихо…") instead of yielding nothing.
+- DmAgent: bound each DM turn with a timeout (2 min default, injectable) so a
+  stalled LLM never hangs the game loop; a stream that ends with no tokens
+  (empty answer, timeout before any token) streams the fallback narrative and
+  records it in chat history. Caller cancellation still propagates — it is
+  never misread as a turn timeout.
+- System events keep rendering: tool events from failed passes/timeouts are
+  forwarded before any narration, as before.
+- Tests: stub clients cover empty → retry with simplified prompt, always-empty
+  → fallback within bound, tools-ran → no retry (fallback), stalled stream →
+  timeout fallback, empty stream → fallback, caller cancel propagates, and
+  InputLoop keeps accepting input after an empty DM turn.
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
