@@ -1,0 +1,22 @@
+repository: serhii/dnd-agent2
+commit: bbe9d11445b722b52d87e49560418e2993345450
+date: 2026-08-14T00:41:22+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+feat(cli): DnD-atmosphere rendering — dice, banners, persona headers, d20 art
+- RenderWelcome: ASCII d20 above the figlet title
+- RenderDiceRoll: 🎲 prefix, colored total with ⚡ КРИТ! / 💀 ФАМБЛ! markers
+- RenderStateTransition: rounded themed banner panels (⚔️ Combat, 🏕️ Rest,
+  🗺️ Exploration, ⚰️ Death, 💀 Game Over, …) with per-state icons and border colors
+- RenderCombatState: «⚔️ Раунд N» header + highlighted current combatant
+  (▶ marker and bold-yellow name)
+- RenderTurnIndicator: «🎯 Твой ход» / «😈 Ход врага» with round info
+- DM/player headers personified: «🐉 Мастер Подземелий» / «🧙 Игрок»
+  (RenderPlayerMessage, RenderDMMessage, DmStreamRenderer)
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
