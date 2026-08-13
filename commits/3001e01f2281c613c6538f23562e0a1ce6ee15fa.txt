@@ -1,0 +1,13 @@
+repository: serhii/dnd-agent2
+commit: 3001e01f2281c613c6538f23562e0a1ce6ee15fa
+date: 2026-08-14T01:05:04+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+chore: remove PRD-0002 (TUI Testing Strategy) and its local tickets
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
