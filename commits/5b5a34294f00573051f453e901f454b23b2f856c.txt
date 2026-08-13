@@ -1,0 +1,13 @@
+repository: serhii/dnd-agent2
+commit: 5b5a34294f00573051f453e901f454b23b2f856c
+date: 2026-08-14T00:41:29+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+docs: changelog entry and issue doc for dnd-atmosphere CLI styling
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
