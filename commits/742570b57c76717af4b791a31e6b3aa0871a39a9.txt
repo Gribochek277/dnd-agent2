@@ -1,0 +1,28 @@
+repository: serhii/dnd-agent2
+commit: 742570b57c76717af4b791a31e6b3aa0871a39a9
+date: 2026-08-14T02:49:26+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+fix(llm): support reasoning_budget in chat_template_kwargs for llama.cpp/Qwen
+Issue #8: with Reasoning:true and MaxOutputTokens:1024, Qwen3.6 spends the
+whole output budget on reasoning_content and returns empty content.
+
+- LlmConfig.ReasoningBudget (int?) — per-profile cap on reasoning tokens,
+  forwarded as chat_template_kwargs.reasoning_budget by OpenAiRequestCustomizer
+  for the QwenChatTemplate format; explicit Compat.ChatTemplateKwargs still win.
+- appsettings.json default: ReasoningBudget: 256 (thinking kept on, narrative
+  guaranteed); DeepSeek/opencode-go profile untouched (no chat_template_kwargs).
+- Unit tests: budget emitted when set, omitted when null, thinking disabled at
+  Reasoning:false, explicit kwargs override, DeepSeek shape unchanged, env binding.
+
+Live check (unsloth/Qwen3.6-27B-MTP-GGUF:UD-Q4_K_XL, max_tokens 1024):
+baseline empty content reproduced (finish=length, 1024 tokens in reasoning);
+with reasoning_budget=256 → 3/3 non-empty; with enable_thinking=false → 3/3
+non-empty (~60 tokens/turn).
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
