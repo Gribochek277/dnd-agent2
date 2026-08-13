@@ -1,0 +1,13 @@
+repository: serhii/dnd-agent2
+commit: 679b713619c8f9838b041bb776e26ccc6ee706e5
+date: 2026-08-14T02:49:28+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+Add CODE_STYLE.md — project code style and conventions document
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
