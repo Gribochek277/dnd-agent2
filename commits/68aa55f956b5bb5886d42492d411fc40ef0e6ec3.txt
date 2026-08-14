@@ -1,0 +1,40 @@
+repository: serhii/dnd-agent2
+commit: 68aa55f956b5bb5886d42492d411fc40ef0e6ec3
+date: 2026-08-14T19:08:18+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+feat(llm): DM-turn diagnostics + llama.cpp tool-call-in-thinking workaround (Gitea #25, #26)
+#25 — turn diagnostics: every DM turn appends one JSONL record to
+reports/llm-turns/ with the raw classified stream (text/reasoning/tool-call/
+tool-result segments), finish reason, corrective passes, executed tool calls
+(extracted-from-thinking marker) and the final action; fallback turns are marked
+with the reason (empty/overflow/timeout/system-note/combat-start). Best-effort
+write — never touches the game loop or the terminal. The agent update stream is
+processed by a segment state machine (AgentStreamSegmentParser) that keeps the
+reasoning channel apart from player narration.
+
+#26 — client-side workaround for llama.cpp #20837: Qwen sometimes emits the tool
+call inside its thinking block, where the server streams it as reasoning_content
+and never surfaces a structured tool_calls event — the turn dies with an empty
+response. ThinkingToolCallChatClient (quirk middleware below the agent's tool
+loop) accumulates reasoning deltas, extracts complete tool calls (JSON
+<tool_call> blocks, Qwen XML <function=...> form, bare JSON) and attaches them
+to the stream as real FunctionCallContent items, so the loop invokes them like
+ordinary calls and the model narrates after seeing the result. ReasoningContentReplayChatClient
+now also replays the actual reasoning text into replayed assistant messages via
+reasoning_content on the wire (the OpenAI adapter would otherwise drop it) and is
+enabled for the llama.cpp/Qwen profile when thinking is on (previously DeepSeek
+only); ModelCompat + DmAgentFactory gate quirk and replay on thinking being
+enabled.
+
+Verified live against the real stack: a fake endpoint emitting the exact #20837
+SSE shape drives the production chain — StartCombat, then AttackRoll+ApplyDamage
+in subsequent combat turns — with zero empty turns and no reasoning leaking into
+the player narrative.
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
