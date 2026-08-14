@@ -1,0 +1,36 @@
+repository: serhii/dnd-agent2
+commit: a40d1a03499db54547b26a0e3e5c6cf9a52f6811
+date: 2026-08-14T03:38:21+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+fix(dm): enforce StartCombat when the DM narrates combat start (issue #12)
+The DM could narrate enemies entering combat ("Битва начинается!", "Химера-страж
+делает выпад") without calling StartCombat, leaving the game in Exploration with
+no initiative or combat state — reproduced twice on playtest.
+
+Mechanism (system-prompt rule + loop guard):
+- PromptBuilder system prompt: combat is a system state; enemy attack / battle
+  start MUST be preceded by a StartCombat call while in Exploration.
+- New ICombatStartMarkerDetector (RU/EN): battle-start declarations, present-tense
+  transitions into the fight, and hostile-action verbs. Imminent-future setup,
+  retrospective and peaceful scenes deliberately do not match (no false positives).
+- TurnPassAdjudicator: new RetryCombatStart action when requireCombatStart is set,
+  markers are present, and no accepted StartCombat call ran this turn.
+- ChatClientAgentStreamSource: exactly one corrective iteration demanding
+  StartCombat; a repeated violation ends the turn with a system note (state
+  unchanged) instead of the false battle narration.
+- CLI DmAgent passes requireCombatStart only from Exploration (where StartCombat
+  can run); combat-in-progress and non-player-facing turns are unaffected.
+
+Tests: 19 new cases — detector positives/negatives (incl. the two repro phrases
+and peaceful scenes), adjudicator combat-start scenarios (accepted/rejected
+StartCombat, flag off, peaceful), stream-source corrective iteration (one-shot,
+fallback note), LlmClient flag forwarding, and DmAgent state→flag wiring.
+dotnet build: 0 errors (known NU1903/CS8632 only). dotnet test: 570/570 green.
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
