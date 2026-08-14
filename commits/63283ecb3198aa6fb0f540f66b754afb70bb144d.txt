@@ -1,0 +1,30 @@
+repository: serhii/dnd-agent2
+commit: 63283ecb3198aa6fb0f540f66b754afb70bb144d
+date: 2026-08-14T18:35:22+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+feat(encounters): triggered check generates and plays out an encounter (issue #30)
+The periodic exploration check (every 4th turn, danger level 6) printed
+'⚠ Something stirs…' and dead-ended. A successful check now generates a
+real encounter via the NPC generator (GenerateEncounterAsync, scaled to the
+party's average level) and hands the stat blocks to the DM for narration —
+the same path as TriggerRandomEncounterTool: the DM can DeclareEncounter/
+StartCombat when the fight breaks out, or resolve it socially/environmentally.
+A failed check still prints nothing; generation failure falls back to the DM
+inventing the encounter instead of crashing the loop.
+
+The encounter prompt is recorded in chat history as a 'system' turn (new
+optional sender on IDmAgent.SendAsync) so it never pollutes player-language
+detection or looks like a player claim.
+
+Tests: InputLoopEncounterTests (hit → DM narrates generated encounter;
+miss → nothing printed; generation null / throwing → DM still narrates) and
+RandomEncounterServiceTests (danger roll gating, stat-block generation via
+the NPC generator).
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
