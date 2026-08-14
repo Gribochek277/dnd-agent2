@@ -1,0 +1,13 @@
+repository: serhii/dnd-agent2
+commit: 6059b7e19caa50104695f2918a29da17b8ec5213
+date: 2026-08-14T03:44:29+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+Merge #14: monster stats catalog (CR/HP/AC per creature type)
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
