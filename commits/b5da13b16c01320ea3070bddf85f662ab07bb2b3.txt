@@ -1,0 +1,13 @@
+repository: serhii/dnd-agent2
+commit: b5da13b16c01320ea3070bddf85f662ab07bb2b3
+date: 2026-08-15T02:51:27+03:00
+author: serhii <serhii@localhost>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+Merge pull request 'Fix: EndOfNextTurn expiry, config-driven response reserve, async ICommand, security bump' (#54) from fix/review-followups into main
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
