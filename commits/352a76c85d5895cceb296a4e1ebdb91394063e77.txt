@@ -1,0 +1,30 @@
+repository: serhii/dnd-agent2
+commit: 352a76c85d5895cceb296a4e1ebdb91394063e77
+date: 2026-08-14T03:33:52+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+feat(xp): milestone/quest XP rewards via GrantMilestoneXp tool + DM prompt rules (#19)
+Issue #19: leveling was unreachable in a session (all fights 50 XP, level 2
+needs 300 XP). Add a milestone/quest XP path on top of the existing XpTracker
+mechanics:
+
+- GrantMilestoneXp DM tool: awards the same XP to every party member after a
+  completed story goal, triggers TryLevelUp (HP/slots/proficiency per 5e),
+  rejects non-positive amounts, empty reasons, and grants during combat.
+- Registered in DmAgentToolProvider; result message carries XP + level-ups.
+- System prompt: milestone-reward rules for the DM (minor 25-50, major
+  100-150, main quest 200-250 XP) so '2 fights + quest' reaches level 2,
+  plus an adjudication line that XP narration requires the tool.
+- ToolEventFormatter renders '🏆 <goal> / ✨ XP +N / ⬆️ <level-up>' lines;
+  MechanicalOutcomeClaimDetector authorizes XP narration after an accepted
+  GrantMilestoneXp; per-turn reminder lists the tool.
+- Tests: tool (grant, rejections, combat guard, two-fights+quest → L2
+  acceptance scenario), formatter, detector, prompt rules. Build clean,
+  full suite green (522 tests, +9).
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
