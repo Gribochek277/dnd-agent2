@@ -1,0 +1,24 @@
+repository: serhii/dnd-agent2
+commit: 49e5eff447c6de129725c296e35f7162182f8e3c
+date: 2026-08-14T19:54:15+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+Gate system combat entry on extracted attack target (issue #36)
+AttackIntentRegex alone (атакую|бью|удар*) triggered the issue #27 system
+combat start for peaceful actions that merely contain a combat word
+("Я бью в дверь, чтобы открыть её", "Ударю кулаком по столу"),
+force-starting combat with the fallback "Враг" after the model resolved
+the action peacefully.
+
+The force-start now also requires an extracted attack target: AttackTargetRegex
+rejects prepositional strikes (в/по right after the verb are no longer treated
+as naming a target), so only direct-object attacks ("Атакую гоблина мечом")
+still guarantee the combat transition. Real attacks keep starting combat
+(issue #27 regression covered by tests).
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
