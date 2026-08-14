@@ -1,0 +1,13 @@
+repository: serhii/dnd-agent2
+commit: 708152e871149e54930e01e812052e4bb9f87b47
+date: 2026-08-14T23:35:19+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+skill: track playtest bugs N1-N5 as issues #46-#51; add HITL #51 to Issue Map
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
