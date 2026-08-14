@@ -1,0 +1,28 @@
+repository: serhii/dnd-agent2
+commit: 56e2e1d3f489e85377942679d1af19729f98ac98
+date: 2026-08-14T03:37:20+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+feat(dm): enforce world authority — player claims never become facts (#13)
+System prompt now carries explicit world-authority rules (RU examples):
+perceptual claims (я вижу монстра / там стоит X / я нашёл X) are reframed
+into a search + system check (AssignDC -> TriggerSave, Perception/
+Investigation) narrated by the roll result; non-perceptual claims
+(я знаю его / это мой амулет / он отдаёт мне ключ) get a polite refusal
+and an intent request; the DM never repeats player-claimed facts as
+truth, free attempts are untouched.
+
+Safety net: IWorldFactClaimDetector extracts claims from the raw player
+input (threaded through ILlmClient/IAgentStreamSource/DmAgent) and
+TurnPassAdjudicator gains TurnPassAction.RetryWorldFact — narration that
+confirms a claimed fact without system backing (no accepted TriggerSave
+for perceptual, no tool at all for non-perceptual) is re-requested once
+(exactly one corrective iteration, bounded; skipped when a state-changing
+tool already ran to avoid double-apply).
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
