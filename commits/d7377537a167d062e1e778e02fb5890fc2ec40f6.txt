@@ -1,0 +1,25 @@
+repository: serhii/dnd-agent2
+commit: d7377537a167d062e1e778e02fb5890fc2ec40f6
+date: 2026-08-14T21:53:01+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+feat(llm): cap thinking via top-level reasoning_budget_tokens and align budgets to the server (issue #42)
+- ReasoningBudget is now sent as top-level reasoning_budget_tokens
+  (llama.cpp b9982+ honors it; the chat_template_kwargs variant is ignored),
+  value 32000, so the DM can think up to 32k tokens per turn
+- MaxOutputTokens 40000 (llama.cpp counts reasoning toward max_tokens:
+  32k thinking + 8k answer headroom)
+- MaxContextTokens 80000 to match the server --ctx-size 128000 (was 170000,
+  a latent context overflow)
+- Whole-turn timeouts raised 120s/2min -> 15min (32k thinking at ~60 tok/s
+  takes ~9 min; the watchdog must sit above worst-case generation)
+
+Playtest: 16 DM turns, 0 empty fallbacks (was ~36%), all mechanical actions
+resolved by the system in a single pass.
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
