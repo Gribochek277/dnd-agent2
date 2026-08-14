@@ -1,0 +1,19 @@
+repository: serhii/dnd-agent2
+commit: 05d31aa63d2dfbec869be53fb6d973dbf3483473
+date: 2026-08-14T21:53:23+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+fix(characters): keep max HP intact when leveling up a wounded character (issue #43)
+Normalize() used to derive MaxHp from the current Hp, so a level-up while
+wounded permanently destroyed the character's max HP (4/14 -> 10/10 max).
+MaxHp is a stat: enforce Hp <= MaxHp by clamping the current HP only, and
+initialize MaxHp from Hp once when an import omits it.
+
+Regression test: wounded 12/30 fighter leveling up keeps MaxHp 40 (was 22).
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
