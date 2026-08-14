@@ -1,0 +1,30 @@
+repository: serhii/dnd-agent2
+commit: 98b590f530269f38497c55f076acf046c811c1b3
+date: 2026-08-15T02:24:16+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+fix: EndOfNextTurn expiry, config-driven response reserve, security bump, async ICommand
+- CombatState: EndOfNextTurn conditions now expire at the end of the affected
+  combatant's own turn (issue #52); IsExpired no longer has a side-effect for
+  that branch; GetInitiativeOrder returns a read-only view
+- PromptBuilder: response reserve is now the configured output cap
+  (IContextBudgetEstimator.MaxOutputTokens) instead of hardcoded 2048 (issue #53)
+- SessionLifecycleService: reads the restore prompt through IInputSource instead
+  of Console.ReadLine
+- ICommand.ExecuteAsync: commands are async by contract; QuitCommand awaits the
+  memory summarization with a 30s timeout instead of Task.Run().Wait()
+- Dnd.CLI.Tests: isolate all DI-based tests from file-backed session persistence
+  (InMemorySessionPersistence) — the file-backed store defaults to the test
+  output folder, leaked saves between runs and raced between parallel classes
+- Dnd.Infrastructure: Microsoft.Data.Sqlite 10.0.9 -> 10.0.11 (SQLitePCLRaw 2.1.12,
+  GHSA-2m69-gcr7-jv3q)
+
+Fixes #52
+Fixes #53
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
