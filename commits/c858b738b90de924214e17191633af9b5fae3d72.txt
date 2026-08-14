@@ -1,0 +1,32 @@
+repository: serhii/dnd-agent2
+commit: c858b738b90de924214e17191633af9b5fae3d72
+date: 2026-08-14T03:31:12+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+feat(combat): monster stats catalog — per-name CR/HP/AC for low-level enemies
+Issue #14: all enemies previously got the same default block (HP 10 / AC 12 /
+CR 1/4 / 50 XP) regardless of the narrative creature.
+
+- Add MonsterStats + IMonsterStatsCatalog/MonsterStatsCatalog: 12 common
+  low-level monsters (CR 1/8-1) with CR, HP, AC, speed, dex modifier and
+  attack bonus; fuzzy name lookup (embedded keyword, word-boundary, case/
+  hyphen-insensitive) with longest-keyword-wins; unknown names fall back to
+  the default block
+- BuildCombatants resolves enemy stats by name from the catalog and sets the
+  catalog CR (XP for defeated enemies continues to come from CrToXp via
+  CombatState.GetDefeatedEnemyXp)
+- ICombatant/Combatant gain AttackBonus (from the catalog); EnemyAIService
+  and AttackRollTool prefer it over the CR-based estimate, and the combat
+  snapshot exposes attack_bonus for enemies
+- Register the catalog in AddDndDM; update existing goblin-stat assertions
+  (HP 7 / AC 15 per catalog) and add unit tests for catalog coverage, fuzzy
+  matching, default fallback, distinct per-name stats and XP by catalog CR
+
+Build: 0 errors (only known NU1903/CS8632 warnings); all tests green.
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
