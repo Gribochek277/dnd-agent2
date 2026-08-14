@@ -1,0 +1,19 @@
+repository: serhii/dnd-agent2
+commit: 3816559218f4b652086ff2106d857967544dc9dd
+date: 2026-08-14T03:26:14+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+fix(rest): skip Hit Dice spend on short rest at full HP, fix Hit Die grammar (#16)
+- RestCommand gates Hit Dice spending: a character at full HP takes the
+  rest without spending Hit Dice and gets an 'already fully healthy'
+  message; damaged characters still spend and recover HP.
+- RestService pluralizes 'Hit Die' (singular) vs 'Hit Dice' (plural) in
+  short rest spend, over-request, and long rest recovery messages.
+- Add unit tests for the gate and the grammar forms.
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
