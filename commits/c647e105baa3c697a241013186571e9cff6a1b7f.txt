@@ -1,0 +1,32 @@
+repository: serhii/dnd-agent2
+commit: c647e105baa3c697a241013186571e9cff6a1b7f
+date: 2026-08-14T03:34:47+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+fix(narration): dedupe/typo/monolingual sanitizer + enemy decision render order (Gitea #17)
+NarrationSanitizer now polishes the surviving narration on top of the existing
+line filtering:
+- deduplication of repeated sentences/paragraphs (exact, normalized, and
+  near-exact via containment/Levenshtein), keeping at least one copy;
+- typo dictionary from playtest 14.08.2026 (варара→варвара, велича→велика,
+  озонов→озона, делашь→делаешь, Твоя факел→Твой факел, Грибной чудовище→
+  Грибное чудовище + same-class agreement rules), word-boundary aware and
+  case-preserving;
+- monolinguality: EN lines are dropped from predominantly-Cyrillic blocks.
+
+Enemy turn render order: IEnemyAIService gains an onDecision callback fired
+as soon as the action is known, so InputLoop renders «decides: Attack» before
+the dice/damage events and the narration (решение → событие → нарратив).
+Enemy narration is now routed through the sanitizer too (collected, sanitized,
+then emitted), matching the DM agent path.
+
+Tests: +11 sanitizer unit tests, +2 enemy-AI tests (decision order, sanitized
+narration), +1 CLI integration test (Start → decides → event → narration →
+End). dotnet build 0 errors (only known NU1903/CS8632), all 527 tests green.
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
