@@ -1,0 +1,13 @@
+repository: serhii/dnd-agent2
+commit: 8e4c2cb0638c3834cf2207b2c5f7bbc11abcc723
+date: 2026-08-14T18:31:05+03:00
+author: serhii <serhii@localhost>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+Add retry taxonomy: classify failures, backoff+jitter, Retry-After, compaction, empty-turn counter (issue #28)
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
