@@ -1,0 +1,13 @@
+repository: serhii/dnd-agent2
+commit: 99615e99e7bd1f410c840bc03f12b3aa5ac212bf
+date: 2026-08-14T03:48:07+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+Merge #15: Rage as tracked battle condition
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
