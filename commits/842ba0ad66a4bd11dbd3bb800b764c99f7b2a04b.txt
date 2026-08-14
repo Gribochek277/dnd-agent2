@@ -1,0 +1,28 @@
+repository: serhii/dnd-agent2
+commit: 842ba0ad66a4bd11dbd3bb800b764c99f7b2a04b
+date: 2026-08-14T18:41:57+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+feat(combat): system combat entry on player attack (issue #27)
+A player attack in Exploration now ALWAYS reaches Combat, even when the
+model stays silent and never calls StartCombat. After the existing
+bounded passes (issue #12, StartCombat requirement) the turn
+orchestrator guarantees the transition:
+
+- system StartCombat with the party + participants from the last
+  DeclareEncounter call (now recorded on the state context);
+- if no encounter was declared, one re-request of the turn demanding
+  DeclareEncounter (bounded single corrective iteration + fallback
+  note), then system start;
+- last resort: the attack target from the player's own message.
+
+Peaceful actions (no attack intent) never start combat. The start
+flow is shared between the StartCombat tool and the system fallback
+via the new ICombatStartService.
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
