@@ -1,0 +1,23 @@
+repository: serhii/dnd-agent2
+commit: 3714c8eb434a9b6c831072c46f012a8c641c3571
+date: 2026-08-14T23:07:21+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+playtest: full D&D lifecycle run 2026-08-14 (run2) + skill self-update
+- Verified: #18 gold/equipment import, #16 rest HD rules, #11 damage persistence,
+  #15 Rage (uses+resistance), #1 XP on player-kill (needs EndCombat), #14 catalog
+  + CR XP, #27 system combat entry, #25 llm-turns diagnostics, TPK flow
+- Confirmed open: #42 fallback collapses (2/5, Reasoning=false workaround),
+  #39 «спасбросок» wording, #38 mixed-language mechanics, #21-#24 memory gaps,
+  #43 MaxHp clamp confirmed in code (CharacterNormalizer.cs:22)
+- New bugs N1-N5: no auto-EndCombat on player kill (critical), #36 regression
+  on instrumental-case attack words, rage-resisted damage line missing,
+  milestone XP/loot narrated without tools, GameOver skips memory finalize
+- Report: reports/playtest-2026-08-14-run2.md
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
