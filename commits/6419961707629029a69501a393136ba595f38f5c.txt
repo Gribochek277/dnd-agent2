@@ -1,0 +1,28 @@
+repository: serhii/dnd-agent2
+commit: 6419961707629029a69501a393136ba595f38f5c
+date: 2026-08-14T03:36:24+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+feat(combat): Rage as tracked battle condition (Gitea #15)
+- ActivateRage tool: bonus-action activation in combat, consumes a Rage use
+  (2 per long rest at level 1, 5e level scaling), applies the Rage condition
+  until end of combat; rejects when no uses left, already raging, or not a
+  Barbarian. Use count persists on PlayerCharacter (RageUsesRemaining).
+- AttackRoll: +2 Rage damage applied systemically for melee Strength attacks
+  while raging (STR >= DEX, ranged weapons excluded).
+- ApplyDamage/CombatState: resistance to bludgeoning/piercing/slashing while
+  raging (halved, rounds down); damageType param on ApplyDamage/AttackRoll
+  tools and enemy AI attacks.
+- Long rest restores Rage uses (RestService + RageTracker); /characters shows
+  remaining uses (Rage: N/M). Combat ending with active Rage is handled by the
+  existing UntilEndOfCombat condition cleanup.
+- Unit tests: RageTrackerTests (uses/recovery), CombatStateTests (resistance,
+  condition, snapshot), DmAgentToolsTests (tool activation, +2 bonus, rejection
+  paths). dotnet build 0 errors, 556 tests green.
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
