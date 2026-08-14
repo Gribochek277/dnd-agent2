@@ -1,0 +1,26 @@
+repository: serhii/dnd-agent2
+commit: 9af97ba62e546124805ed8454051b2a60294794b
+date: 2026-08-14T03:33:45+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+feat(trade): end-to-end merchant trade flow (#18)
+- New BuyItem DM tool: atomic merchant purchase — deducts gold and adds the
+  item in one step via IInventory.Purchase; insufficient gold rejects with a
+  clear message and changes nothing (refund guard if adding the item fails)
+- IInventory.Purchase + GetItemsSummary; SpendGold/GrantLoot unchanged
+- DM system prompt: trade-flow rules (merchant scenes with prices, when to
+  use BuyItem vs SpendGold vs GrantLoot); per-character prompt context now
+  shows live gold and inventory, keeping the DM in sync with /characters
+- PlayerCharacter: Gold is now the live inventory value; raw JSON import
+  surface renamed to ImportedGold (JsonPropertyName "gold") and excluded
+  from serialization to avoid JSON name collision
+- CLI: player-facing 💰 purchase line in tool events (BuyItem formatting)
+- Tests: +20 (inventory purchase atomicity, BuyItem tool, prompt trade
+  rules + character gold/inventory, formatter); build/test green
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
