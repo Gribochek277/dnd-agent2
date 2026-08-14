@@ -1,0 +1,13 @@
+repository: serhii/dnd-agent2
+commit: a3b5c13e0270a8bdc6316da53ea40ca47004de19
+date: 2026-08-14T19:38:24+03:00
+author: serhii <serhii@localhost>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+Merge pull request 'Structured history compaction instead of hard trim (issue #29)' (#35) from feat/context-compaction into main
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
