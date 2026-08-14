@@ -1,0 +1,14 @@
+repository: serhii/dnd-agent2
+commit: d7db8b834d305692581baa6da90f48b7be3a993e
+date: 2026-08-15T00:27:07+03:00
+author: serhii <serhii@localhost>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+Merge pull request 'Keep max HP intact when leveling up a wounded character (issue #43)' (#44) from fix/maxhp-levelup into main
+Reviewed-on: http://100.110.77.11/serhii/dnd-agent2/pulls/44
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
