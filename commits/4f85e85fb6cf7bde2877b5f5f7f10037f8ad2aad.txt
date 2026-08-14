@@ -1,0 +1,23 @@
+repository: serhii/dnd-agent2
+commit: 4f85e85fb6cf7bde2877b5f5f7f10037f8ad2aad
+date: 2026-08-14T19:09:10+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+Compact history with structured LLM summary instead of hard trim (issue #29)
+When the full prompt exceeds the context budget (context minus the response
+reserve), the oldest turns are replaced by a single LLM-generated structured
+summary (Goal / Progress / Key Decisions / Critical Context) while the freshest
+Compaction:KeepRecentTokens tokens stay verbatim. The summary is written in the
+player's language, preserves premise/NPCs/decisions/items, and is merged with
+the previous summary on repeated compactions (pi-style iterative compaction).
+The summary entry lives in the chat history so /save and /load keep working;
+the summarization pass is a plain completion with thinking disabled and never
+triggers game tools. PromptBuilder keeps a defensive trim (single enormous
+turn, LLM unavailable) that never evicts the summary entry.
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
