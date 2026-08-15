@@ -1,0 +1,13 @@
+repository: serhii/dnd-agent2
+commit: 50c57c73f8d49e43fbc29e209ec54fad522475c1
+date: 2026-08-15T05:41:17+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+Merge branch 'feat/llm-turn-diagnostics'
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
