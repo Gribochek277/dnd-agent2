@@ -1,0 +1,13 @@
+repository: serhii/dnd-agent2
+commit: f279e7e39c442e056ffc0278643e6a3f9374b921
+date: 2026-08-15T04:25:53+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+playtest: 2026-08-15 run — stall at combat entry (N6, critical) + skill self-update (Issue Map sync, SSH creds policy)
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
