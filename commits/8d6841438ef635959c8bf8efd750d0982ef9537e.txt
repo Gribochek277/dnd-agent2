@@ -1,0 +1,13 @@
+repository: serhii/dnd-agent2
+commit: 8d6841438ef635959c8bf8efd750d0982ef9537e
+date: 2026-08-15T05:29:43+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+skill: Issue Map sync — #62 closed (ADR-0001 merged), #61 P0 fix merged awaiting playtest
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
