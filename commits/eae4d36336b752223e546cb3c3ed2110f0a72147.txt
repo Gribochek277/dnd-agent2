@@ -1,0 +1,28 @@
+repository: serhii/dnd-agent2
+commit: eae4d36336b752223e546cb3c3ed2110f0a72147
+date: 2026-08-15T03:14:56+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+fix: instrumental weapon after the attack verb no longer starts combat (issue #47)
+'От злости бью рукоятью топора по стене' extracted the instrument
+(рукоятью) as the attack target, so the system combat-start gate fired
+and even resurrected the last declared encounter.
+
+- ExtractAttackTarget rejects a word with an instrumental ending
+  (-ом/-ем/-ой/-ей/-ью/-ами/-ями: топором, кулаком, дубиной, рукоятью)
+  right after the attack verb — it names the weapon, not a target
+- 'на' is now treated as an attack preposition and skipped
+  ('нападаю на гоблина' extracted 'на' itself as the target before)
+- 'ударю' added to the target verbs, so 'Ударю кулаком по столу' is
+  exercised by the rejection instead of passing by missing verb coverage
+- The peaceful-message invariant is unchanged: the fallback combat start
+  only runs when the gate (non-null target) already passed
+
+Fixes #47
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
