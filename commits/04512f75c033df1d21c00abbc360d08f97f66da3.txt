@@ -1,0 +1,13 @@
+repository: serhii/dnd-agent2
+commit: 04512f75c033df1d21c00abbc360d08f97f66da3
+date: 2026-08-15T05:24:39+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+fix: N6 stall (issue #61) — per-request no-data watchdog (90s, retry-once), NetworkTimeout 120s, reasoning budget 32000→4096 / output 40000→8192, turn-start diagnostics; keep 15-min turn timeout as backstop
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
