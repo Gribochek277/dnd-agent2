@@ -1,0 +1,33 @@
+repository: serhii/dnd-agent2
+commit: cedacb9d876f0723e683309943f92166f92dce4f
+date: 2026-08-15T03:41:36+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+fix: auto-EndCombat when the player kills the last enemy (issue #46)
+After the player's accepted AttackRoll/ApplyDamage killed the last enemy,
+the fight hung in Combat with a DEAD enemy until the player typed
+«бой окончен» — the outcome depended on the DM remembering EndCombat.
+
+System guarantee (InputLoop):
+- after either side's turn, an active combat with no living combatants on
+  one side ends itself via the existing HandleCombatEnded path: Combat →
+  Exploration, XP granted (GrantXp transition action), HP persisted
+  (SyncPlayerCharacters), checkpoint save — mirroring the enemy-AI path
+- HandleCombatEnded no longer takes the unused EnemyTurnResult parameter
+
+Enforcement (TurnPassAdjudicator):
+- a pass whose accepted attack/damage result reports
+  'ALL ENEMIES DEFEATED' (CombatState's marker on the killing blow) but
+  contains no accepted EndCombat is re-requested (RetryMechanical)
+  instead of being accepted on the AttackRoll alone; once the bounded
+  passes are exhausted the narration is accepted and the InputLoop
+  fallback ends combat, so the player is never left stuck
+
+Fixes #46
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
