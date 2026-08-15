@@ -1,0 +1,32 @@
+repository: serhii/dnd-agent2
+commit: c33e1c4c35e66b5dfa1cb155a0b3e4437e639ac3
+date: 2026-08-16T02:43:26+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: unknown
+
+message:
+Level-up narration walks the player through new class features (#40)
+The DM previously only narrated a generic "ты достиг уровня, стал
+сильнее" on a level-up and never taught what the character actually
+gained (e.g. Reckless Attack / Danger Sense for a Barbarian at level 2).
+
+- Collect the leveled-up characters (name, class, new level) on
+  IGameStateContext.LevelUps from both the GrantMilestoneXp tool and the
+  GrantXp combat transition action.
+- Pass LevelUps through PromptContext; PromptBuilder emits a <level_up>
+  block on the level-up turn naming who leveled and instructing the DM
+  to perform the level-up ritual and walk the player through the new
+  class features, spells, and HP/stat improvements from 5e knowledge.
+- Add the matching level-up ritual guidance to the DM system prompt.
+- Clear HasLevelUps/LevelUps after the level-up narration turn so later
+  prompts are not polluted (DmAgent consumes the pending flag once).
+
+Covered by a PromptBuilder unit test (block included when level-ups are
+present, absent otherwise), a DM tool assertion on LevelUps population,
+and a DmAgent integration test (block reaches the prompt + flag cleared
+after the turn).
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
