@@ -1,0 +1,35 @@
+repository: serhii/dnd-agent2
+commit: e1ffb57200ea0f0dbadfb0de1a13acbaca5480bd
+date: 2026-08-15T05:15:32+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+feat: render tool events from structured payloads, not result regexes (issue #56, closes N3/#48)
+Add ToolCallEvent.StructuredResult: tools keep returning the exact LLM-facing
+result string, and each player-facing tool additionally produces a typed
+payload (damage, heal, save, death save, DC, combat start/end, milestone XP,
+loot, gold, purchase, attack roll). Payloads travel out-of-band through the
+new IToolResultPayloadSink (recorded by DmAgentToolProvider, drained by
+ChatClientAgentStreamSource) and are attached at every ToolCallEvent
+construction site: ChatClientAgentStreamSource, InputLoop, DmAgent,
+EnemyAIService.
+
+ToolEventFormatter now renders entirely from structured fields (all 17 regex
+removed) and falls back to the raw result string when no payload exists —
+never hiding mechanical truth, never crashing. The (resisted: ...) N3
+regression is covered by tests on both the ApplyDamage and AttackRoll paths.
+
+Interfaces in Dnd.Core/Llm/Interfaces (classifier agent's zone) untouched
+except ToolCallEvent.cs; DmAgent intent regexes, TurnPassAdjudicator and
+*Detector.cs untouched; ChatClientAgentStreamSource diff limited to the
+ToolCallEvent construction plus sink plumbing.
+
+Tests: ToolEventFormatterTests rewritten with payloads + fallback coverage,
+new ToolCallEventTests and ToolResultPayloadSinkTests, stream-source payload
+tests. dotnet build and dotnet test green (912 tests).
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
