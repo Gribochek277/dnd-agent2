@@ -1,0 +1,19 @@
+repository: serhii/dnd-agent2
+commit: 51d2622709e6d4b4418aa60fb4bbd1c078c24034
+date: 2026-08-15T03:03:30+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+fix: render the damage line when damage is reduced by Rage resistance
+CombatState inserts a ' (resisted: <type>)' note between 'damage' and the
+HP report when a raging Barbarian halves the hit; both formatter regexes
+expected 'damage (HP' directly and silently dropped the system line (issue #48).
+Allow the optional resistance note in DamageRegex and AttackDamageRegex.
+
+Fixes #48
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
