@@ -1,0 +1,47 @@
+repository: serhii/dnd-agent2
+commit: a38379883a64318e78b0235a25f406f6acf0e855
+date: 2026-08-15T05:22:48+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+feat: replace regex semantics with no-thinking LLM classifiers (ADR-0001)
+The DM pipeline's semantic decisions about free text (attack intent/target,
+mechanical claims, combat-start markers, world-fact confirmations) were made
+by morphological regex heuristics that could not understand Russian case,
+prepositions or new phrasings (the N2-class bugs, issues #36/#47).
+
+Now the system directs and the LLM decides (ADR-0001):
+- IPlayerIntentClassifier (LlmPlayerIntentClassifier): classifies the player's
+  action before the prompt is assembled — attack (with target), check, save,
+  rest (informational) or other. Replaces AttackIntentRegex/AttackTargetRegex/
+  CheckOrSaveIntentRegex/InstrumentalEndingRegex in DmAgent; the combat-start
+  gate (#27/#36/#47) and the mandatory-enforcement decision keep their exact
+  semantics, driven by the verdict.
+- INarrationAdjudicator (LlmNarrationAdjudicator): audits each pass of DM
+  narration like a second master at the table — mechanical claims, combat
+  start, world-fact confirmation. Replaces the MechanicalOutcomeClaim/
+  CombatStartMarker/WorldFactClaim detectors in the enforcement path.
+- TurnPassAdjudicator is now async: it fetches the verdict only when a
+  semantic gate needs it, and every enforcement decision (retry/accept/
+  fallback, pass-0-only world-fact, one-shot flags) stays deterministic.
+  Claim backing is verified deterministically against accepted tool calls —
+  the system owns mechanical truth and overrides the LLM's advisory flag.
+- Both classifiers: cheap no-thinking structured-JSON calls (max_tokens 128,
+  reasoning forced off, own 12s timeout), fail-open — a failure yields
+  Other/no-claims and never throws into the game turn.
+- Shadow mode (Llm:AdrShadowDetectors, default true): the old detectors keep
+  running and divergences are logged to reports/adr-shadow-*.jsonl.
+- Tests: attack/peaceful matrix and check/save/rest intents in DmAgentTests
+  now run on deterministic stub classifiers; TurnPassAdjudicatorTests cover
+  claims (damage without tool -> retry, etc.), deterministic backing
+  overrides, fail-open, and shadow logging; classifier implementations get
+  fail-open/JSON/request-shape tests.
+
+ChatClientAgentStreamSource diff is a single awaited call; the world-authority
+prompt rule was already in PromptBuilder (merge #13).
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
