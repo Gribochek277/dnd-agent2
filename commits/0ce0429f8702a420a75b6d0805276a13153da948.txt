@@ -1,0 +1,20 @@
+repository: serhii/dnd-agent2
+commit: 0ce0429f8702a420a75b6d0805276a13153da948
+date: 2026-08-16T02:08:39+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+Make IMemoryProvider registration explicit and singular (#21)
+Remove the default EmptyMemoryProvider registration from Dnd.Core and delete
+the class; IMemoryProvider is now wired exactly once, in Dnd.Infrastructure.
+PromptBuilder keeps receiving IMemoryProvider via the constructor, so a missing
+memory setup fails loudly at startup instead of silently producing an empty
+<memory> block. Core tests that need a provider use explicit fakes. Add a
+resolution test that Core + DM + Infrastructure + CLI resolves IMemoryProvider
+to the real MemoryProvider.
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
