@@ -1,0 +1,13 @@
+repository: serhii/dnd-agent2
+commit: e71815a3bb2b2e13628b4647e78364a78315535c
+date: 2026-08-15T04:47:54+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+adr: refine ADR-0001 with design decisions — separate no-thinking classifiers, prompt-first world-fact layer, bounded-by-construction, big-bang migration
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
