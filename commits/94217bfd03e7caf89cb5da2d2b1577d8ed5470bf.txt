@@ -1,0 +1,26 @@
+repository: serhii/dnd-agent2
+commit: 94217bfd03e7caf89cb5da2d2b1577d8ed5470bf
+date: 2026-08-15T20:21:41+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+playtest 2026-08-15 (pane wD:pV): combat entry blocked by GenerateNPC retry-storm (#61/#63) + skill self-update
+Playtest (2 runs, ctrl+c after #61/#63):
+- Verified #18 (gold/equipment import + negative paths), #16 (rest at full HP).
+- #61/#63 reproduces critical: GenerateNPC sub-request retry-storm (226 records /
+  209 with 0 passes today); random encounter AND directed sahuagin combat setup both
+  stalled, DM turn collapsed to empty fallback, combat never started even on explicit
+  attack -> combat path is blocked.
+- Open bugs: #39 (спасбросок for checks, 2x), #41 (fictional rest not mapped), #64
+  (verbose thinking). NEW UA: full DM chain-of-thought (DCs, danger level,
+  stage-directions) streamed to player as 💭 -> D&D immersion/language break.
+- Static: #21 EmptyMemoryProvider ordering (fragile but real provider wins via DI).
+
+Includes skill self-update (Issue Map + Playtest Log + Pitfalls/Validation) and
+playtest report. Includes unrelated in-progress working-tree changes per user request.
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
