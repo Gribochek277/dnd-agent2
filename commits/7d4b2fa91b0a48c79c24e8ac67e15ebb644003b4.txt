@@ -1,0 +1,32 @@
+repository: serhii/dnd-agent2
+commit: 7d4b2fa91b0a48c79c24e8ac67e15ebb644003b4
+date: 2026-08-16T02:51:59+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: unknown
+
+message:
+fix: fictional rest declaration maps to the Rest state (#41)
+A rest declared in fiction (free-form text, e.g. "Я сажусь у причала,
+разжигаю костёр и отдыхаю полчаса") was only narrated — the game never
+entered the Rest state, so the fiction and the /rest mechanic were two
+disconnected flows. The intent classifier (ADR-0001) already detects a
+rest; now the DmAgent records RestRequested when a rest is declared from
+Exploration or Social, and the input loop fires the Exploration/Social ->
+Rest transition after the DM narrates it, so the next prompt reads Rest
+and the existing /rest completion flow (HP/Hit-Dice recovery -> Rest ->
+Exploration) takes over.
+
+A rest declared mid-Combat never requests the transition (a rest is a
+non-combat action), and a classifier failure (fail-open -> Other) never
+requests one either. PlayerIntent.Rest doc updated to reflect that it now
+requests the Rest transition (no longer purely informational).
+
+Adds unit tests on DmAgent (RestRequested set from Exploration/Social, not
+from Combat/FailOpen/Other), a GameStateMachine test for the Exploration/
+Social -> Rest transitions, and an InputLoop integration test that a
+fictional rest enters the Rest state.
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
