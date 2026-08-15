@@ -1,0 +1,13 @@
+repository: serhii/dnd-agent2
+commit: 83e3f33f39ec315647149644429e304900af2459
+date: 2026-08-15T04:37:02+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+docs: ADR-0001 agent harness — state machine directs, LLM decides (replace regex semantic parsing); add regex audit report
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
