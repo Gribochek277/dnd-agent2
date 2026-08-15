@@ -1,0 +1,13 @@
+repository: serhii/dnd-agent2
+commit: 7056b93416cafe87d05e8a4421fb3545cead666b
+date: 2026-08-15T04:49:03+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+adr/skill: keep 15-min turn timeout untouched; N6 track = find client-side hang (sync-over-async), not timeout change
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
