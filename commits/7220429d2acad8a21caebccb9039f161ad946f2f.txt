@@ -1,0 +1,21 @@
+repository: serhii/dnd-agent2
+commit: 7220429d2acad8a21caebccb9039f161ad946f2f
+date: 2026-08-16T02:28:53+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: unknown
+
+message:
+fix: call ability checks «проверка», saving throws «спасбросок» (issue #39)
+The mechanical roll line rendered from the AssignDC/TriggerSave path always
+said «спасбросок», conflating ability checks with saving throws in 5e.
+Carry the roll kind (check vs save) through TriggerSave into SaveResultPayload
+via a new isCheck flag (mirroring isDeathSave) and render «проверка» for
+ability checks while keeping «спасбросок» for actual saving throws and death
+saves. Update the formatter tests and add DM tool-level coverage.
+
+Closes #39
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
