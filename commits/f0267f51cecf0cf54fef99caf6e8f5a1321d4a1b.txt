@@ -1,0 +1,13 @@
+repository: serhii/dnd-agent2
+commit: f0267f51cecf0cf54fef99caf6e8f5a1321d4a1b
+date: 2026-08-16T10:41:25+03:00
+author: serhii <serhii@localhost>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+Memory checkpoints: write on combat end & /save, cap memory block, finalize on GameOver (issues #22, #24, #50) (#91)
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
