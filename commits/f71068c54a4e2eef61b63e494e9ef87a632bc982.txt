@@ -1,0 +1,25 @@
+repository: serhii/dnd-agent2
+commit: f71068c54a4e2eef61b63e494e9ef87a632bc982
+date: 2026-08-16T03:30:15+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: unknown
+
+message:
+fix(#39): expose and forward isCheck through the TriggerSave tool contract
+DmAgentToolProvider registered TriggerSave as a 3-argument func
+(target, ability, isDeathSave), so the isCheck parameter added to
+TriggerSaveTool/ExecuteWithPayload never reached the tool from the LLM —
+an ability check was silently rendered as «спасбросок» even though the
+tool description told the model to set isCheck. This is the actual path
+where the #39 label bug persisted.
+
+- Register the tool with a 4-argument Func so isCheck is exposed to and
+  forwarded by the AIFunction.
+- Add a regression test that invokes the AIFunction with isCheck=true
+  through Microsoft.Extensions.AI and asserts the message reads
+  «Ability check» (would fail if the wiring is dropped again).
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
