@@ -1,0 +1,17 @@
+repository: serhii/dnd-agent2
+commit: 58c5c78d6def7be2857b22bb4439184c64fa6321
+date: 2026-08-16T10:45:59+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: unknown
+
+message:
+chore: resolve merge conflicts with main (tool progress sink, larger system prompt)
+- InputLoop: keeps both IToolProgressSink (#63) and IMechanicalTextLocalizer (#38).
+- ConsoleRenderer: RenderToolProgress (#63) + localized BuildHpBar (#38) coexist.
+- PromptBuilderTests: budgets bumped for the 14.3k-char system prompt.
+- CHANGELOG keeps entries from both sides.
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
