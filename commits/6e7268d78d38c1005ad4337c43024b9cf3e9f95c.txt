@@ -1,0 +1,29 @@
+repository: serhii/dnd-agent2
+commit: 6e7268d78d38c1005ad4337c43024b9cf3e9f95c
+date: 2026-08-17T00:58:33+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+feat(llm): server owns sampling by default — per-role temperature moved to config
+The agent no longer overrides the sampling temperature on every call:
+- ILlmClient.SendPromptStreamingAsync / IAgentStreamSource.StreamAsync now
+  take float? temperature = null; null omits the field from the request,
+  so the server's own sampling settings apply (llama.cpp --temp, top-p/k).
+- Per-role overrides stay available in config:
+  LLM:DmTemperature / EnemyDecisionTemperature / EnemyNarrationTemperature /
+  NpcTemperature / MemoryTemperature (all null by default; keys documented
+  in appsettings.json).
+- Removed hardcoded constants (DM 0.8, enemy decision 0.2 / narration 0.8,
+  stat block 0.2, memory 0.3) — DmAgent, EnemyAIService, NpcGeneratorService,
+  MemoryService now read IOptions<LlmConfig> (optional ctor param).
+- Debug trace prints temperature=server-default when unset.
+- Tests: fakes updated to the nullable signature; EnemyAIService fake now
+  discriminates decision/narration by prompt content, not temperature.
+
+Verified live: [llm] attempt 1/4 ... temperature=server-default.
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
