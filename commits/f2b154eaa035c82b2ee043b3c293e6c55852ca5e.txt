@@ -1,0 +1,27 @@
+repository: serhii/dnd-agent2
+commit: f2b154eaa035c82b2ee043b3c293e6c55852ca5e
+date: 2026-08-16T09:07:38+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+feat: GenerateNPC sub-request progress + bounded retries with default-block fallback (#63)
+- New ambient IToolProgressSink (CLI registers a renderer, Dnd.DM tools
+  report): the terminal now shows «⚙ Генерирую статблок: <имя>…» /
+  «⚙ Повторная попытка…» / fallback notice while the sub-request runs
+  instead of minutes of silence.
+- Per-call retry budget on ILlmClient.SendPromptStreamingAsync (maxRetries,
+  clamped to the configured policy); the GenerateNPC sub-request passes
+  maxRetries: 0 and the service loop owns the retries (3 attempts max).
+- Dead-end responses (no-data watchdog note, empty-response fallback) fail
+  fast instead of re-running the same dead path.
+- After the bound, the service returns a deterministic default stat block
+  (IsFallback, passes 5e validation) instead of null — the GenerateNPC tool
+  never fails, so the DM model never re-invokes it into a retry storm.
+- InputLoop opens the stream header before encounter generation so progress
+  lines render under it; +LlmClient/NpcGeneratorService/NpcValidator tests.
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
