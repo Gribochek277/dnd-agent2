@@ -1,0 +1,20 @@
+repository: serhii/dnd-agent2
+commit: 0ff8d8d5f8cf8a8b936703976dc1a4d59e4912c0
+date: 2026-08-16T10:34:34+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: unknown
+
+message:
+chore: resolve merge conflicts with main (Inspiration tool contract, test budgets)
+- PromptBuilder: rules-reference section now carries the Inspiration tool
+  contract (GrantInspiration/SpendInspiration before the roll) merged from
+  #89, keeping the system-module structure of #85.
+- PromptBuilderTests: budgets bumped for the larger system prompt
+  (13499 chars after #72/#77/#40/#85).
+- StatsCommandTests.FakeRenderer implements RenderToolProgress (#94).
+- CHANGELOG keeps entries from both sides.
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
