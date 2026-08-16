@@ -1,0 +1,33 @@
+repository: serhii/dnd-agent2
+commit: 2f82135bf3c522b7292c30317e85873d897784d1
+date: 2026-08-16T08:38:54+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: unknown
+
+message:
+feat: CharacterTables + official XP table (#83), /stats command (#84), rules-reference prompt (#85)
+- CharacterTables (port of character.py): ICharacterTables/CharacterTables as the single
+  source of truth for proficiency bonus, official 5e XP thresholds, hit dice, saving
+  throws, skills, point-buy costs and caster types; XpTracker levels up on the official
+  table (level 3 = 900, level 4 = 2,700, ... level 20 = 355,000) — intentional pacing
+  change vs the old compressed table (level 4 was 1,400); CharacterNormalizer derives
+  proficiency/hit dice from the tables; CharacterClassCatalog delegates class data;
+  GetXpThreshold(level > 20) out-of-range bug fixed (clamps to 355,000)
+- AbilityScoreService (port of ability-scores.py): RollArrays (4d6 drop lowest),
+  CheckPointBuy (27-point budget, OK/UNDER/OVER, 8-15 range, unknown-stat errors),
+  Modifiers; new CLI command /stats roll|pointbuy|mods with ConsoleRenderer rendering
+  and clear errors; listed in /help for the interactive states
+- PromptBuilder: 'Core rules summary' replaced by a marked 'D&D 5e Rules Reference
+  (system module)' section (dice, abilities, character structure, official XP
+  thresholds, rests, death saves, conditions, inspiration nat-20 backstop) + separate
+  Gameplay operations section; adjudication contract and world-authority sections
+  byte-identical; milestone-XP block keeps level-2 numbers and notes official
+  thresholds with upward scaling above level 2
+- Tests: XpTrackerTests on official thresholds, AbilityScoreServiceTests (24 cases),
+  StatsCommandTests (12 cases), PromptBuilderTests rules-reference checks and budget
+  recalibration; CHANGELOG entry
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
