@@ -1,0 +1,33 @@
+repository: serhii/dnd-agent2
+commit: 30911b0e93e355ddd1abfa018266aaa8c375c07a
+date: 2026-08-16T08:55:17+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: unknown
+
+message:
+Memory checkpoints: write at combat end & /save, cap memory block, finalize on GameOver
+Issue #22 — checkpoint memory writes:
+- SessionLifecycleService.SummarizeMemoryAsync: shared tail-of-50 summarization
+  with a 30s bound; extraction errors/timeouts reported to the player, never crash.
+- InputLoop fires the checkpoint after every Combat -> Exploration transition
+  (DM-tool and system-detected paths); the TPK path is covered by exit finalization.
+- SaveCommand (/save) now persists the session AND summarizes memory.
+
+Issue #50 — finalize on every exit path:
+- Finalization moved from QuitCommand to the InputLoop GameOver exit, so /quit,
+  TPK/GameOver and any other exit path save the session and write memory exactly once.
+
+Issue #24 — memory block token cap:
+- PromptBuilder budgets memory to 15% of the context (clamped after system +
+  response reserve) and passes the budget to IMemoryProvider.BuildMemoryBlock(maxTokens).
+- MemoryProvider trims over-budget blocks keeping the newest lines of each topic
+  (binary-searched per-topic tail), never the first bytes of the file.
+
+Tests: MemoryProviderTests (cap/tail-priority/checkpoint->prompt), PromptBuilder
+large-memory test (history survives), SessionLifecycleService/SaveCommand/QuitCommand
+unit tests, InputLoop TPK/victory lifecycle integration tests. 999 tests green.
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
