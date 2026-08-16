@@ -1,0 +1,13 @@
+repository: serhii/dnd-agent2
+commit: 95297d1e3d2689c1baf9941117b5ce590107431e
+date: 2026-08-16T10:28:04+03:00
+author: serhii <serhii@localhost>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+feat(srd): SearchRules tool over SRD lookup + SRD monster catalog (issue #81, #82) (#93)
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
