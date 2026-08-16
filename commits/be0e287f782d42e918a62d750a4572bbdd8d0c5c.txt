@@ -1,0 +1,13 @@
+repository: serhii/dnd-agent2
+commit: be0e287f782d42e918a62d750a4572bbdd8d0c5c
+date: 2026-08-16T08:43:30+03:00
+author: serhii <serhii@localhost>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+feat(llm): LLM-based world-fact claim detector (ADR-0001 completion) (#86)
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
