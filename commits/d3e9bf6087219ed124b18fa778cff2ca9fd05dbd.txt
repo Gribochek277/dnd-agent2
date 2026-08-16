@@ -1,0 +1,13 @@
+repository: serhii/dnd-agent2
+commit: d3e9bf6087219ed124b18fa778cff2ca9fd05dbd
+date: 2026-08-16T10:11:06+03:00
+author: serhii <serhii@localhost>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+fix: fictional rest declaration maps to the Rest state (#41) (#71)
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
