@@ -1,0 +1,13 @@
+repository: serhii/dnd-agent2
+commit: 3b99b398341569a2d7395a8e0387b26022f43d28
+date: 2026-08-16T10:09:58+03:00
+author: serhii <serhii@localhost>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+Level-up narration walks player through new class features (#40) (#70)
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
