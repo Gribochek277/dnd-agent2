@@ -1,0 +1,13 @@
+repository: serhii/dnd-agent2
+commit: 2dd4ca7a3412599a3997366d0b8af21224d54a3e
+date: 2026-08-16T03:51:59+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+docs: transformation roadmap vs claude-dnd-skill — epics A–F (#72–#77)
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
