@@ -1,0 +1,13 @@
+repository: serhii/dnd-agent2
+commit: 31f6e6225f9a6a868f31700d33baf9b099584275
+date: 2026-08-17T01:12:18+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+skill: Issue Map — evidence comments on #51/#66/#73/#20 (2026-08-16 playtest findings), new #95/#96 (GenerateNPC combat wiring, lightweight JSON profile)
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
