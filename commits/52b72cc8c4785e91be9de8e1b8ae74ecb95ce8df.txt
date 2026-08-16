@@ -1,0 +1,13 @@
+repository: serhii/dnd-agent2
+commit: 52b72cc8c4785e91be9de8e1b8ae74ecb95ce8df
+date: 2026-08-16T03:44:40+03:00
+author: serhii <serhii@localhost>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+Merge pull request 'Make IMemoryProvider registration explicit and singular (#21)' (#68) from feat/issue-21-memoryprovider-registration into main
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
