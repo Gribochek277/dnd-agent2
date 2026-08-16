@@ -1,0 +1,32 @@
+repository: serhii/dnd-agent2
+commit: d403d5a3a0981d2c5ce63e4791867a0852b11b58
+date: 2026-08-16T08:53:10+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+feat: DM persona standards + calibration (#72), NPC persona generation (#78)
+#72 — 14 behavioral standards (claude-dnd-skill port) woven into the DM system
+prompt, adapted to the system-owns-mechanics contract: calibration via DM Style
+Notes (Std 9, read on load from <memory>, refreshed at session end), Faction
+Moves (Std 11, distilled per session), reward bold play / nat-20 backstop
+(Std 12), open with a bang (Std 13), never play the player's side (Std 14),
+consequences are real (Std 3), plus active-DM habits and XP-calibration rules.
+New memory topics StyleNotes (style-notes.md) and Factions (factions.md) are
+seeded by a single no-thinking calibration pass at /quit
+(IMemoryService.CalibrateAsync) and injected back into <memory> by
+MemoryProvider.
+
+#78 — NpcStatBlock/NpcGeneratorService gain a persona layer: demeanor,
+motivation, secret, speech quirk, attitude scale (hostile..allied, tolerant
+parse with Neutral fallback), faction, current goal, schedule, personality
+axes and a relationship web (knows/owes/hates/fears/allied, >=2 requested).
+Combat stat block unchanged; validation stays soft for persona (retry-storm
+guard) but rejects malformed relationship edges and unknown personality poles.
+Generated personas are written to npcs.md immediately via a new
+INpcPersonaMemoryWriter bridge (Dnd.DM interface, Infrastructure impl).
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
