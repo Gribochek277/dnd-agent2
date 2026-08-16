@@ -1,0 +1,35 @@
+repository: serhii/dnd-agent2
+commit: 1bdbec099735726a8d87c86321c952117d325877
+date: 2026-08-16T09:02:15+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: unknown
+
+message:
+feat(srd): SearchRules tool over SRD lookup + SRD monster catalog (issues #81, #82)
+Replace the seeded RulesRetriever and the hard-coded MonsterStatsCatalog
+with SRD-backed implementations:
+
+- SearchRulesTool now queries IRulesLookup (category-aware output, spell/
+  item/monster/condition/feature formatters) and answers unknown names
+  with a 'Did you mean' hint from the fuzzy suggestion pass.
+- New SrdMonsterStatsCatalog (Dnd.DM): stat blocks come from the bundled
+  SRD dataset via IRulesLookup (monsters category). Name resolution:
+  direct lookup → Cyrillic transliteration («Химера-гоблин») → longest
+  phrase/keyword windows ("Giant Crab 1", "Sahuagin priest") → fuzzy
+  suggestion («Глубинный сахуагин» → sahuagin). Unknown names keep the
+  legacy default block (CR 1/4, HP 10, AC 12).
+- MonsterStats extended with size/type/ability scores/alignment/
+  languages/description; AttackBonus derived deterministically from
+  best(STR,DEX) mod + proficiency-by-CR (official table).
+- Deleted: RulesRetriever, IRulesRetriever, RuleEntry (seeded rules),
+  MonsterStatsCatalog; DI updated (IRulesLookup in Infrastructure,
+  SrdMonsterStatsCatalog in DM).
+- IRulesLookup gained GetCategory for full-category consumers.
+- Tests: MonsterStatsCatalogTests rewritten on a SQLite-backed mini
+  dataset (same case matrix + SRD cases), new SearchRulesToolTests,
+  DmAgentToolsTests/CombatStartServiceTests wired to the SRD catalog.
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
