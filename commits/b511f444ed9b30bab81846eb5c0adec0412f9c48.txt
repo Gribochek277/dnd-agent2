@@ -1,0 +1,45 @@
+repository: serhii/dnd-agent2
+commit: b511f444ed9b30bab81846eb5c0adec0412f9c48
+date: 2026-08-16T08:59:20+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: unknown
+
+message:
+feat: enforce loot/quest rewards (#49) + localize mechanical lines (#38)
+Issue #49 (playtest N4): the DM narrated quest completion and gold
+rewards without calling the tools, so nothing landed on the sheets.
+- MechanicalOutcomeClaimDetector: loot patterns (amount+money word,
+  receipt verb + treasure/item noun) and quest-completion patterns
+  («квест выполнен», «цель достигнута», "quest completed"); backing
+  via accepted GrantLoot/BuyItem (loot) and GrantMilestoneXp (quest).
+- INarrationAdjudicator: new Loot/Quest claim outcomes, mapped from
+  the auditor's JSON ("loot"/"gold"/"treasure"/"item", "quest"/"milestone"/"goal");
+  auditor prompt now classifies reward claims.
+- TurnPassAdjudicator: deterministic backing for Loot and Quest claims;
+  unbacked reward narration re-requests the turn (RetryMechanical).
+- Corrective prompt, per-turn reminder and DM system prompt name the
+  reward tools; milestone ranges (25-50/100-150/200-250) stay in the
+  DM rules.
+- Unit tests: detector patterns (positive/negative/backed), adjudicator
+  backing (GrantLoot/BuyItem/GrantMilestoneXp, rejected-call, EndCombat
+  does not back quests), auditor outcome mapping.
+
+Issue #38: system lines mixed English fragments and raw stat-block
+names into Russian narration.
+- New IMechanicalTextLocalizer (Dnd.CLI): the enemy «decides:» line
+  («X решает: Атака»), combat-table headers/type labels
+  («Имя/Тип/Иниц./ХП/КД/Эффекты», «Игрок/Враг»), the dead marker
+  («ПОВЕРЖЕН») and combat-outcome banners follow NarrationLanguage;
+  Russian default (UI is Russian-first), English sessions stay English.
+- Dice expression renders «против КД N» / "vs AC N".
+- Fiction names: DM prompt + StartCombat description require naming
+  enemies as the players know them («Водяной Страж», not the raw
+  stat-block name) — the combat table and tool events render exactly
+  the names passed to the tools.
+- Tests: localizer RU/EN mapping, updated integration assertions for
+  the localized decides line, banners and dice expressions.
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
