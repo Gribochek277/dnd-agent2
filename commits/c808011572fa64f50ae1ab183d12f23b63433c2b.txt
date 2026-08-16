@@ -1,0 +1,26 @@
+repository: serhii/dnd-agent2
+commit: c808011572fa64f50ae1ab183d12f23b63433c2b
+date: 2026-08-16T08:08:28+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: unknown
+
+message:
+feat(llm): LLM-based world-fact claim detector (ADR-0001 completion)
+Port the world-fact claim detection from regex heuristics to a no-thinking
+LLM classifier, completing the ADR-0001 big-bang migration (intent
+classifier + narration adjudicator were already LLM-based).
+
+- WorldFactClaimDetector now calls the LLM to decide whether the player's
+  message claims a world fact (perceptual vs non-perceptual) and whether
+  the DM narration confirms it — replacing morphological regex patterns.
+- TurnPassAdjudicator passes through the claim confirmation result.
+- StubWorldFactClaimDetector fixture for tests; unit tests cover claim
+  extraction and confirmation paths.
+
+WIP commit from the main checkout (session leftovers), verified: solution
+builds, 65 related tests pass.
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
