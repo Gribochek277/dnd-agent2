@@ -1,0 +1,32 @@
+repository: serhii/dnd-agent2
+commit: 6167c48bfbedd88e73d7b7f06f5a35a9296d3735
+date: 2026-08-16T08:43:20+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: unknown
+
+message:
+feat(srd): bundled SRD dataset + SQLite rules store + fuzzy RulesLookup (issues #79, #80)
+Port the open-tabletop-gm SRD layer (build_srd.py + lookup.py) into the app:
+
+- Dnd.Tooling build-srd command: fetches 5e-bits/5e-database (spells,
+  equipment, magic_items, conditions, monsters) and foundryvtt/dnd5e
+  (class/racial features, 2024 SRD) and normalizes them into one bundled
+  data/dnd5e_srd.json (1453 records) with _meta provenance (repo/branch/
+  sha/built_at/record_counts/licenses). --no-fvtt skips features, --status
+  prints counts and provenance.
+- Dnd.Infrastructure SrdDatabaseBuilder: lazy JSON → SQLite build (per-
+  category tables + FTS5 over name/description), rebuilt only when the
+  dataset's built_at changes; missing JSON degrades to empty lookups.
+- Dnd.Infrastructure RulesLookup (IRulesLookup in Core): port of lookup.py —
+  scoring 3/2/1 (exact/starts-with/contains), difflib-style Suggest for
+  'did you mean?', LookupWithLevel collapsing scale progressions.
+- Category-aware formatters (port of _fmt_*).
+- Tests: RulesLookupTests on a mini dataset (Infrastructure), SrdNormalizers
+  unit tests (new Dnd.Tooling.Tests project) for HTML stripping, scale
+  tables and every normalizer.
+- README: SRD data provenance + license NOTICE (MIT+OGL, MIT+CC-BY-4.0).
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
