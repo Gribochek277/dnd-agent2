@@ -1,0 +1,13 @@
+repository: serhii/dnd-agent2
+commit: 8302cf36972c53870328d0f5f97ef502caef6236
+date: 2026-08-16T10:34:50+03:00
+author: serhii <serhii@localhost>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+feat: CharacterTables + official XP (#83), /stats (#84), rules-reference prompt (#85) — PR3 (#87)
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
