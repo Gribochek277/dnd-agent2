@@ -1,0 +1,42 @@
+repository: serhii/dnd-agent2
+commit: 412aa3e33267bbc81e8182e81e362f9b705686b1
+date: 2026-08-16T23:48:41+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+fix(render): thinking streams row-by-row (word-per-column) — block-wide SGR + line coalescing
+Root cause (2026-08-16 playtest): DmStreamRenderer wrote every thinking
+fragment as its own write+flush wrapped in per-fragment SGR. The Herdr
+emulator closes a row at every write/style transition; pass-2 thinking
+arrives one token per SSE event, so the block rendered one word per line
+(incl. mid-word splits "mo/ored").
+
+Fix:
+- Open dim-italic SGR once for the whole block at the 💭 prefix, reset
+  once on the thinking→narration transition / turn end (SGR persists
+  across rows).
+- Coalesce fragments into complete lines (flush only on \n, 600-char
+  partial-line safety bound) so rows close only at real line breaks.
+
+Verified live: 1210 fragments → 48 terminal writes (27:1).
+
+Also in this change:
+- DebugTrace (--debug / DND_DEBUG=1 / Debug:Enabled): timestamped stderr
+  trace (llm/turn/watchdog/npc/render) for stall diagnostics; Program.cs
+  threads --debug into config.
+- GenerateNPC root cause: sub-request completed (Accept ~50-60s) but the
+  model wraps JSON in markdown fences and NpcStatBlock.FromJson could not
+  parse it → 3 bounded retries → default block; the DM turn thrashed in
+  corrective passes for minutes. Fix: ExtractJsonObject pulls the first
+  balanced {...} (string/escape aware). Verified: attempt 1 → VALID,
+  combat entry reached (StartCombat → enemy/player attacks → round 2).
+- Skill self-update: Playtest Log 2026-08-16, pitfalls (word-per-line,
+  fenced JSON), validation checks, #61/#63 card rows.
+
+Tests: 1211 passed (added fenced/prose JSON theory cases).
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
