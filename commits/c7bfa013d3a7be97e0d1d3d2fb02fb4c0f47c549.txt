@@ -1,0 +1,21 @@
+repository: serhii/dnd-agent2
+commit: c7bfa013d3a7be97e0d1d3d2fb02fb4c0f47c549
+date: 2026-08-16T03:17:10+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: unknown
+
+message:
+fix(#41): drop stale RestRequested when no longer in an eligible state
+A rest declared in fiction is a one-shot intent. If the game leaves the
+eligible states (Exploration/Social) before the transition is observed —
+e.g. combat breaks out during the DM turn — the leftover RestRequested
+now is cleared instead of deferred, so it can never fire an unexpected
+Rest on a later turn that returns to Exploration/Social.
+
+Adds a regression test that forces Combat before the attack turn and
+asserts the stale request is dropped (fails without this change).
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
