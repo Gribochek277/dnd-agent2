@@ -1,0 +1,21 @@
+repository: serhii/dnd-agent2
+commit: 1700e8e0e43d0630a8c609e2dde84676f02e92ea
+date: 2026-08-16T03:51:56+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+feat: thinking-level → reasoning-budget mapping (#65) + concise-thinking prompt (#64)
+- ThinkingLevel (minimal/low/medium/high) now maps to a reasoning_budget_tokens
+  ceiling on endpoints without native reasoning_effort: 1024/2048/8192/16384,
+  clamped to keep ~1024 tokens free for the answer (port of pi's
+  supportsThinkingTokenBudget). Explicit ReasoningBudget always overrides.
+- reasoning_effort remains the primary depth control for Qwen3.8+/DeepSeek.
+- System prompt gains a 'reason briefly, 2-4 sentences' instruction (#64 p2).
+- +10 OpenAiRequestCustomizer tests; PromptBuilder budget test bumped for the
+  longer prompt.
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
