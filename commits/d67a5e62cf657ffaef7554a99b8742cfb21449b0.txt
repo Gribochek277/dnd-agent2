@@ -1,0 +1,28 @@
+repository: serhii/dnd-agent2
+commit: d67a5e62cf657ffaef7554a99b8742cfb21449b0
+date: 2026-08-16T08:46:02+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+Epic F (#77): Inspiration as tracked resource with nat-20 hard backstop
+- PlayerCharacter.HasInspiration (binary, max 1, persisted with session)
+- GrantInspiration/SpendInspiration DM tools (any game state; spend marks the
+  next d20 roll with advantage)
+- IInspirationTracker as the single deterministic choke point: pending
+  advantage consumed at player d20 roll sites (AttackRoll, TriggerSave,
+  death saves via CombatState.RollDeathSave useAdvantage path) and the
+  nat-20 hard backstop (nat-20 on any PC d20 test auto-grants Inspiration
+  when not already held - never an LLM decision)
+- System prompt gains the mechanical Inspiration contract; prelude and
+  /characters card show Inspiration state; NarrationSanitizer knows the
+  new tool names
+- CONTEXT.md documents Inspiration + out-of-scope roll-mode (CLI/system dice)
+- 41 new tests: tracker semantics, tool flows, advantage consumption,
+  backstop (attack/save/death save), persistence round-trip, prompt,
+  sanitizer, DI registration
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
