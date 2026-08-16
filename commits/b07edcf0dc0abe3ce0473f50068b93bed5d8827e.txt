@@ -1,0 +1,20 @@
+repository: serhii/dnd-agent2
+commit: b07edcf0dc0abe3ce0473f50068b93bed5d8827e
+date: 2026-08-16T10:41:20+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: unknown
+
+message:
+chore: resolve merge conflicts with main (calibration pass, larger system prompt)
+- SessionLifecycleService: checkpoint timeout now bounds both LLM passes
+  (summarize + issue #72 calibrate); timeout raised to 60s.
+- QuitCommand keeps the 60s constant; PR's single-exit-point flow retained.
+- MemoryProviderTests: PR's new-API suite + regression test for the
+  StyleNotes/Factions topics (issue #72/#90).
+- PromptBuilderTests: budget bumped for the 13.5k-char system prompt.
+- CHANGELOG keeps entries from both sides.
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
