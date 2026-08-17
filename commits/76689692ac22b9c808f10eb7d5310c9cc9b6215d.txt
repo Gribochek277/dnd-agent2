@@ -1,0 +1,13 @@
+repository: serhii/dnd-agent2
+commit: 76689692ac22b9c808f10eb7d5310c9cc9b6215d
+date: 2026-08-17T17:05:10+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,main,prototype/eval-harness-core
+
+message:
+docs(adr): ADR-0002 monster authority — resolution hierarchy, learning gate, alias dictionary (#51)
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
