@@ -1,0 +1,13 @@
+repository: serhii/dnd-agent2
+commit: be56509c76aff3543ceccc31515e7dabd92907ca
+date: 2026-08-18T14:29:05+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: prototype/eval-harness-core,prototype/grading-rubric,prototype/regression-report
+
+message:
+prototype: typo in PROTOTYPE.md
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
