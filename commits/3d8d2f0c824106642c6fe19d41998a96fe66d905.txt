@@ -1,0 +1,13 @@
+repository: serhii/dnd-agent2
+commit: 3d8d2f0c824106642c6fe19d41998a96fe66d905
+date: 2026-08-18T04:54:22+03:00
+author: serhii <serhii@users.noreply.local>
+branches: research/coverage-audit
+
+message:
+research: existing test coverage vs capability x layer grid (map #101, ticket #105)
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
