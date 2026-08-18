@@ -1,0 +1,18 @@
+repository: serhii/dnd-agent2
+commit: 3496cb95b00ae5a955597d915da84867fd6849cf
+date: 2026-08-18T14:28:13+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: prototype/eval-harness-core,prototype/grading-rubric,prototype/regression-report
+
+message:
+prototype: full stub-mode trial pipeline (in-process OpenAI stub server)
+The Stub-mode seam now stands in for llama.cpp at the HTTP level: an
+in-process OpenAI-compatible server (SSE streaming) + the same raw-SDK
+factory production builds. A full end-to-end trial (seed -> IDmAgent
+replay -> snapshots -> diff -> graders -> transcript JSON) runs
+deterministically in the test suite, no LLM required.
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
