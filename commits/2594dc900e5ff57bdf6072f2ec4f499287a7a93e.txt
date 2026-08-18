@@ -1,0 +1,22 @@
+repository: serhii/dnd-agent2
+commit: 2594dc900e5ff57bdf6072f2ec4f499287a7a93e
+date: 2026-08-18T18:24:39+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: prototype/eval-harness-core,prototype/grading-rubric,prototype/regression-report
+
+message:
+prototype: graceful scripted-dice miss + corrected combat dice
+Live-run finding (2026-08-18): combat start rolls initiative for BOTH
+combatants, so the scenario's 1d20 queue of [19,17] was exhausted on turn
+one and the attack roll missed the queue. Two fixes:
+
+- combat-goblin-basic.yaml: 1d20: [19,17,17] (two initiatives + attack).
+- AgentEvaluator: a ScriptedDiceMissedRollException is a designed fatal,
+  not a harness crash — the trial stops, the world is snapshotted as-is,
+  the miss is recorded as a failed 'scripted-dice' grade with a full
+  transcript (TrialEventType.FatalError).
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
