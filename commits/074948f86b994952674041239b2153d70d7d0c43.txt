@@ -1,0 +1,23 @@
+repository: serhii/dnd-agent2
+commit: 074948f86b994952674041239b2153d70d7d0c43
+date: 2026-08-18T16:30:18+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: prototype/eval-harness-core,prototype/grading-rubric,prototype/regression-report
+
+message:
+prototype: live trial runner + production config for trials
+- Dnd.Evals.Run: manual live-run entry point (scenario id -> full trial,
+  verdict + transcript), the no-CI manual-run shape from the map.
+- WorldSeeder loads Dnd.CLI/appsettings.json so a trial runs the exact
+  production LLM configuration (reasoning budget, max output, compaction);
+  only endpoint/model identity is overridden.
+
+Field finding from the first live trial: default LlmConfig (MaxOutputTokens
+1024, thinking medium) starves a thinking model — the stream no-data
+watchdog fires and the turn falls back to empty narration. Production
+appsettings (8192 / low / 4096) avoids it.
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
