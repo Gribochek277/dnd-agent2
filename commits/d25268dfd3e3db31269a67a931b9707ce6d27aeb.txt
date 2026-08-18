@@ -1,0 +1,23 @@
+repository: serhii/dnd-agent2
+commit: d25268dfd3e3db31269a67a931b9707ce6d27aeb
+date: 2026-08-18T19:12:13+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: prototype/eval-harness-core,prototype/grading-rubric,prototype/regression-report
+
+message:
+prototype: two-round combat scenario (goblin survives round one)
+Live-run finding (2026-08-18, run 4): the original dice killed the goblin on
+round one, so the second player line ('hit it with the axe') targeted a dead
+enemy — StartCombat then threw an opaque 'Function failed.' four times. That
+is a real production finding (tool error messages are not actionable for the
+model), tracked separately.
+
+Scenario reworked: 1d20 [19,17,17,17] (2 initiatives + 2 attacks),
+1d12+3 [2,6] (5 damage: goblin 7→2 alive; 9 damage: 2→0 dead), expected
+state exploration after EndCombat, EndCombat in the expected tools, XP 50
+asserted.
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
