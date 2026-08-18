@@ -1,0 +1,19 @@
+repository: serhii/dnd-agent2
+commit: 6c5461dcaca9f2e7a4b065bfbcf8437626f741d0
+date: 2026-08-18T19:30:41+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: prototype/eval-harness-core,prototype/grading-rubric,prototype/regression-report
+
+message:
+prototype: pin round-two player line to the sheet weapon name
+Run 5 finding: the line 'Бью его двуручным топором!' made the model call
+AttackRoll with damage=1d12 (dropping the +3 STR bonus) — a genuine
+adjudication deviation the harness caught via the scripted-dice miss.
+Round one ('Я атакую гоблина.') rolled the correct 1d12+3. Pinning the
+weapon wording to the character sheet ('большой топор') keeps the
+scenario testing adjudication, not weapon-label interpretation.
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
