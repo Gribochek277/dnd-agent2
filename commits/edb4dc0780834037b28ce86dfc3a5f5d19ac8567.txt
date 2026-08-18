@@ -1,0 +1,19 @@
+repository: serhii/dnd-agent2
+commit: edb4dc0780834037b28ce86dfc3a5f5d19ac8567
+date: 2026-08-18T19:47:24+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: prototype/eval-harness-core,prototype/grading-rubric,prototype/regression-report
+
+message:
+prototype: assert the kill through outcome flags, not the corpse
+Run 6 finding: the combat played out EXACTLY as scripted (round one 5 damage,
+goblin 7->2; round two 9 damage, 2->0; EndCombat, XP 50, exploration) but the
+state assertions looked for combat.combatants[Гоблин].hp AFTER EndCombat —
+the combat object is cleared when combat ends, so the path no longer exists.
+Assert flags.allEnemiesDefeatedOrFled + XP instead. Noted in the YAML:
+per-turn assertions are a scenario-model gap (spec #103 territory).
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
