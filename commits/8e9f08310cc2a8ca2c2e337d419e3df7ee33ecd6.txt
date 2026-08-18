@@ -1,0 +1,19 @@
+repository: serhii/dnd-agent2
+commit: 8e9f08310cc2a8ca2c2e337d419e3df7ee33ecd6
+date: 2026-08-18T14:00:11+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: prototype/eval-harness-core,prototype/grading-rubric,prototype/regression-report
+
+message:
+prototype: eval harness core (ticket #102)
+Throwaway design artifact for the DM-agent testing spec (map #101):
+WorldSnapshot capture/diff, AgentScenario + YAML schema, ScriptedDiceEngine,
+IGrader seam with deterministic graders, AgentEvaluator runner, three worked
+scenarios (combat/social/memory) and the schema reference doc.
+
+Not for merge — resolves the design question only.
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
