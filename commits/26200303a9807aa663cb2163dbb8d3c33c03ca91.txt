@@ -1,0 +1,13 @@
+repository: serhii/dnd-agent2
+commit: 26200303a9807aa663cb2163dbb8d3c33c03ca91
+date: 2026-08-18T14:55:42+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: prototype/eval-harness-core,prototype/grading-rubric,prototype/regression-report
+
+message:
+prototype: clean test warnings (async/await, Assert.Equal)
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
