@@ -1,0 +1,13 @@
+repository: serhii/dnd-agent2
+commit: 90e14263cff50ff6755e7a2b1df54844ef0a10db
+date: 2026-08-18T04:59:10+03:00
+author: serhii <serhii@users.noreply.local>
+branches: research/external-grader-models
+
+message:
+research: external grader model options for the LLM-grader slot (map #101, ticket #107)
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
