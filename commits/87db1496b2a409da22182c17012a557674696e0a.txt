@@ -1,0 +1,33 @@
+repository: serhii/dnd-agent2
+commit: 87db1496b2a409da22182c17012a557674696e0a
+date: 2026-08-19T22:07:50+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: prototype/grading-rubric,prototype/regression-report
+
+message:
+evals: rubric-driven LLM grading — two grader families, anchored 0-5 scale, circularity guard
+Wayfinder ticket #103 (map #101). Decisions locked across two grilling rounds:
+
+- Two LLM grader calls per trial (narration, dm-quality), each with its own
+  prompt template + rubric under Dnd.Evals/Rubrics/.
+- Canonical dimension names drive scoring (narration 6, dm-quality 4);
+  free-form scenario notes are prompt guidance only.
+- 0-5 anchored integer scale; pass derived in code at uniform threshold 3
+  (per-dimension override table reserved for pilot data); na with reason.
+- Grader input: curated digest (scenario meta, transcript, world record
+  verbatim, compact after-state) — not the full snapshot JSON.
+- Circularity guard: anchors = deterministic graders; trusted = grader model
+  is not the model under test AND all anchors pass; self-grades advisory;
+  broken-trial verdicts recorded but untrusted.
+- Grader slot config-driven (endpoint/model/key/timeout, ticket #107);
+  promptVersion = SHA-256(template+rubric)[:8].
+- Malformed verdict JSON: one retry, then grader-error fails the trial.
+
+Scenario hints re-mapped to the canonical vocabulary; loader fails loudly on
+unknown dimension names. Schema doc + glossary (Rubric, Circularity Guard)
+updated.
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
