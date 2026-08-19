@@ -1,0 +1,13 @@
+repository: serhii/dnd-agent2
+commit: 2a136add33bceb8da1501ca39596f9972d3e8b54
+date: 2026-08-20T00:32:19+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,integration/batch-6,main
+
+message:
+docs: glossary — Loop Breaker sharpened (in-harness guard stack, no rollback), Trial Budget added (wayfinder #106)
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
