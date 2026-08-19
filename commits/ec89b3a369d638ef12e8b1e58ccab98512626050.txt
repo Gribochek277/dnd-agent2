@@ -1,0 +1,30 @@
+repository: serhii/dnd-agent2
+commit: ec89b3a369d638ef12e8b1e58ccab98512626050
+date: 2026-08-19T22:07:50+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: prototype/grading-rubric,prototype/regression-report
+
+message:
+evals: grading pilot — 3 live trials + non-circular Ornith-9B cross-check
+Pilot for ticket #103: combat-goblin-basic (FAIL — scenario under-scripted,
+designed loud failure; self-grader caught a real repetition defect, coherent 2),
+social-guard-persuasion (PASS), memory-false-recall (PASS).
+
+Non-circular cross-check via new --regrade runner mode (re-grade recorded
+trials with a different grader slot, no conversation re-run): Ornith-1.0-9B
+on this machine agrees on ALL 6 pass/fail verdicts, sharpens scores (4s where
+Qwen self-grade gave 5s), and adds a one-point nuance on npc-in-character.
+Calibration review C1-C4 locked: uniform threshold 3 stays; bilingual
+narration stays out of the rubric (production prompt defect); no-dice RESOLVED
+attack = violation (anchor clause added, promptVersion 5e67c6d2->3902a16b,
+production bug tracked in #110); self-grade leniency bounded by the cross-check.
+
+Harness fixes found by the pilot: HttpClient default 100s Timeout was
+pre-empting the slot's grader budget (linked token is now the only deadline);
+grader.timeout wired end-to-end (#107 slot config). Report:
+reports/pilot-grading-2026-08-19.md.
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
