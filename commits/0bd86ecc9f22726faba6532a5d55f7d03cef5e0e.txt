@@ -1,0 +1,13 @@
+repository: serhii/dnd-agent2
+commit: 0bd86ecc9f22726faba6532a5d55f7d03cef5e0e
+date: 2026-10-03T17:01:29+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,integration/batch-6,main
+
+message:
+docs: testing spec — assemble docs/testing-spec.md from the wayfinder map's resolved tickets (wayfinder #108)
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
