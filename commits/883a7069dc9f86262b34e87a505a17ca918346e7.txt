@@ -1,0 +1,13 @@
+repository: serhii/dnd-agent2
+commit: 883a7069dc9f86262b34e87a505a17ca918346e7
+date: 2026-10-03T16:40:23+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: prototype/regression-report
+
+message:
+evals: regression-report logic prototype — run-vs-run classification, per-chunk rollup, expectation ledger (wayfinder #109)
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
