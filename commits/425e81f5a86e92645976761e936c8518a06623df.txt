@@ -1,0 +1,35 @@
+repository: serhii/dnd-agent2
+commit: 425e81f5a86e92645976761e936c8518a06623df
+date: 2026-10-03T18:29:56+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,integration/batch-6,main
+
+message:
+feat(llm): repeat guard N=3 for identical tool calls in one pass (#117)
+Spec §6 (gap G4): the production agent harness bounded a pass by the
+number of tool calls (8) but never detected repetition. Add the streak
+breaker alongside that bound:
+
+- N = 3 consecutive identical completed calls (tool name + normalized
+  arguments) in one pass cut the pass; key order in the arguments is
+  irrelevant (ordinal sort), the reject flag is not part of the identity.
+- Every completed call counts (rejected and successful alike); any other
+  call or a pass boundary resets the streak.
+- The trip goes through the same path as the per-pass bound: the pass
+  ends, the turn gets the existing ToolLoopFallbackNote, and the calls
+  that already ran keep their effect (no rollback). Diagnostics record a
+  distinct RepeatedToolCallStreak action / ToolCallStreak fallback reason.
+- The threshold is injectable via the constructor (default 3).
+
+The existing tool-storm test now varies its arguments: a storm of
+different calls is the per-pass bound's job, identical calls are the
+streak guard's.
+
+Tests: Dnd.Core.Tests/ChatClientAgentStreamSourceHangGuardTests.cs (7).
+
+Refs #117
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
