@@ -1,0 +1,13 @@
+repository: serhii/dnd-agent2
+commit: c300e2db3af062f5547d0d31aaadbe1943681175
+date: 2026-10-03T17:31:37+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,integration/batch-6,main
+
+message:
+docs: спецификация тестирования по-русски с понятными терминами (оценщик/прогон/аспект) + словарь соответствий
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
