@@ -1,0 +1,31 @@
+repository: serhii/dnd-agent2
+commit: 43663309571a0b21a45034d2f21ec760fbedc00c
+date: 2026-10-03T18:31:21+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,integration/batch-6,main
+
+message:
+feat(llm): stable prompt version id for the DM system prompt (#119)
+Gap G7 of the testing spec (§3): a shift in a trial must be attributable
+to a prompt build instead of guessed.
+
+- PromptVersionCalculator: SHA-256(text)[:8] as lowercase hex.
+- IPromptBuilder.GetPromptVersion(): version of the stable system
+  instructions. The hash covers ONLY the static system prompt — per-turn
+  context (memory block, active characters, history, combat state) is
+  deliberately excluded, so the id does not move from turn to turn.
+- TurnDiagnosticsRecord.PromptVersion is stamped for every DM turn via a
+  new optional promptVersion argument on ILlmClient / IAgentStreamSource;
+  DmAgent supplies it. Non-DM sub-requests (enemy decision, NPC
+  generation, memory summarization) run on their own prompts and leave
+  the field empty.
+- Tests: PromptVersionTests (same text → same id, edited text → new id,
+  session data does not move the id) plus diagnostics and DmAgent
+  forwarding coverage.
+
+Criteria version and the trial-passport wiring stay in #118.
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
