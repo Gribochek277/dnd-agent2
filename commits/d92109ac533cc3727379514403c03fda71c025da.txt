@@ -1,0 +1,36 @@
+repository: serhii/dnd-agent2
+commit: d92109ac533cc3727379514403c03fda71c025da
+date: 2026-10-03T18:31:09+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,integration/batch-6,main
+
+message:
+feat(evals): world-integrity rule engine + Dnd.Evals project (#115)
+Adds the deterministic integrity engine the "hang protection" capability
+chunk was missing (audit gap G2, MVP step 2). New Dnd.Evals test project
+(xUnit, added to Dnd.slnx); harness code under Evals/**, deterministic
+self-tests under Tests/**, per docs/testing-spec.md §3.
+
+Six rules with the ids the eval-scenario schema already references:
+- hp-bounds            HP of characters and combatants inside [0..MaxHp]
+- slots-bounds         used spell slots inside [0..TotalSlots]
+- gold-non-negative    character gold >= 0
+- inventory-non-negative  no negative inventory stack
+- initiative-ordered   combatant list in descending initiative order
+- combat-turn-valid    CurrentTurnIndex in bounds while combat is active
+
+Rules read live production state (IGameStateContext / ICombatState) — no
+world snapshot invented here (#118 owns it). The engine returns structured
+results: rule id, pass/fail, and IntegrityViolation(Path, Observed,
+Expected) per offender, using the spec's assertion-path vocabulary
+(characters[name=Грибочек].hp) so campaign-run detectors can consume it.
+
+32 deterministic self-tests: a passing and a constructed-violation case per
+rule, plus engine selection and the path vocabulary.
+
+No production code changed. Closes #115.
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
