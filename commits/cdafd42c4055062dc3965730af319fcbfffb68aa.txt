@@ -1,0 +1,13 @@
+repository: serhii/dnd-agent2
+commit: cdafd42c4055062dc3965730af319fcbfffb68aa
+date: 2026-10-03T18:16:24+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,integration/batch-6,main
+
+message:
+docs(plan): архив замысла — прогресс отдан трекеру, снимок эпиков A–F + T на 2026-08-20
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
