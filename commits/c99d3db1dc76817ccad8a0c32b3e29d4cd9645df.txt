@@ -1,0 +1,13 @@
+repository: serhii/dnd-agent2
+commit: c99d3db1dc76817ccad8a0c32b3e29d4cd9645df
+date: 2026-10-03T17:01:37+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: prototype/regression-report
+
+message:
+docs: mark TESTING_APPROACH_DRAFT.md superseded by docs/testing-spec.md (wayfinder #108)
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
