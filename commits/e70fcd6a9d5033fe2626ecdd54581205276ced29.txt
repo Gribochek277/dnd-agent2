@@ -1,0 +1,13 @@
+repository: serhii/dnd-agent2
+commit: e70fcd6a9d5033fe2626ecdd54581205276ced29
+date: 2026-10-03T18:12:31+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,integration/batch-6,main
+
+message:
+docs: MVP-шаг 5 = ядро харнесса (G5), реестр версий промптов остаётся шагом 6 (G7)
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
