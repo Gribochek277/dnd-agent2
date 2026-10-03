@@ -1,0 +1,13 @@
+repository: serhii/dnd-agent2
+commit: 56799281b88f4062f9c6f9573fa932c66bf2b204
+date: 2026-10-03T17:32:30+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,integration/batch-6,main
+
+message:
+docs: glossary в понятных терминах — прогон/оценщик/аспект/предохранитель вместо trial/grader/chunk/loop breaker
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
