@@ -1,0 +1,20 @@
+repository: serhii/dnd-agent2
+commit: 17b43edc469a2e07a129a8737f27ae2a6f95b6d2
+date: 2026-10-03T18:27:42+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,integration/batch-6,main
+
+message:
+test: one shared model test double instead of eight private copies (#114)
+Gap G1 from the #105 testing audit. FakeChatClient lived in four
+Dnd.Core.Tests files and FakeLlmClient in two each of Dnd.DM.Tests and
+Dnd.Infrastructure.Tests. Move both to a shared TestSupport/ folder
+linked into the affected test projects via <Compile Include Link>, with
+no new project. Behavioural divergences become constructor parameters:
+Chunking (Whole/PerLine/PerCharacter) and throw-on-streaming, so the
+existing tests keep their exact scripted answers.
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
