@@ -1,0 +1,13 @@
+repository: serhii/dnd-agent2
+commit: 3d7509d87b511da1556261029e9be7f0f52a84fc
+date: 2026-10-03T17:31:57+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,integration/batch-6,main
+
+message:
+docs(adr): ADR-0003 — тестирование по аспектам: модульные тесты для механики, сценарные проверки для поведения модели
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
