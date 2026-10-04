@@ -1,0 +1,30 @@
+repository: serhii/dnd-agent2
+commit: d9ae2e5c578f2d94fe45ac6b54f64bea05a91e1e
+date: 2026-10-04T21:38:14+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,integration/batch-6,main
+
+message:
+feat: switchable LLM profiles with opencode-go / DeepSeek V4.1 Flash cloud model (#123)
+The app can now run against either the local llama.cpp/Qwen model or the
+opencode-go / DeepSeek V4.1 Flash cloud model, so tests and game sessions can
+run in parallel without sharing the local GPU.
+
+- Real opencode-go-deepseek profile values in appsettings.json
+  (https://opencode.ai/zen/go/v1, deepseek-v4.1-flash, DeepSeek compat:
+  max_tokens, no store, reasoning-content replay, 1M context / 384k output).
+  API key stays a placeholder.
+- Profile selection: --profile <name> / --set KEY=VALUE on the CLI, or
+  DND_LLM_PROFILE in the environment. Profile values overlay the base LLM
+  section; environment (LLM__*) and CLI overrides win over the profile.
+- The key is never committed: read from DND_LLM_API_KEY (fallback
+  OPENCODE_GO_API_KEY). A cloud provider with a placeholder/empty key fails
+  loudly at startup instead of a 401 mid-session.
+- Tests: profile resolution and source precedence, unknown profile, missing
+  key, argument parsing, credential guard.
+- Docs: make run-cloud + README section (selection, key, cost).
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
