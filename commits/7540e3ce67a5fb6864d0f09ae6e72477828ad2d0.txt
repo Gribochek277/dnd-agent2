@@ -1,0 +1,32 @@
+repository: serhii/dnd-agent2
+commit: 7540e3ce67a5fb6864d0f09ae6e72477828ad2d0
+date: 2026-10-05T02:11:36+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,integration/batch-6,main
+
+message:
+fix(infra): idempotent, race-safe rules store build (#129)
+SrdDatabaseBuilder created its schema with plain CREATE TABLE meta /
+CREATE TABLE {table} and rebuilt the shared data/rules.db with no guard.
+Two consumers pointing at the same path — parallel xUnit classes, each with
+its own DI container and therefore its own builder — raced and the second
+one died with "SQLite Error 1: 'table meta already exists'".
+
+- Serialize the lazy build process-wide (lock (BuildGate)) and re-check
+  freshness inside the gate, so a builder that finds a store another instance
+  just produced reuses it instead of deleting/rebuilding under the first
+  reader.
+- Make the schema idempotent: CREATE TABLE / VIRTUAL TABLE / TRIGGER
+  IF NOT EXISTS and INSERT OR REPLACE into meta — a repeated or partially
+  completed build no longer conflicts.
+- Regression tests (Dnd.Infrastructure.Tests/SrdDatabaseBuilderTests):
+  8 concurrent builders over one database produce a single duplicate-free
+  store, and a second builder reuses a fresh store instead of rebuilding it.
+  Both fail against the pre-fix builder.
+
+Full dotnet test Dnd.slnx green: 1421 passed, 0 failed.
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
