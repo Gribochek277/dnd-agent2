@@ -1,0 +1,13 @@
+repository: serhii/dnd-agent2
+commit: ff57096170cef587ee09c317e92f5287144e815a
+date: 2026-10-05T01:37:19+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,integration/batch-6,main
+
+message:
+merge: #110 tool errors (CHANGELOG union)
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
