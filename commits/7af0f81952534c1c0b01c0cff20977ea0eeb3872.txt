@@ -1,0 +1,13 @@
+repository: serhii/dnd-agent2
+commit: 7af0f81952534c1c0b01c0cff20977ea0eeb3872
+date: 2026-10-04T21:22:01+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,integration/batch-6,main
+
+message:
+merge: docs/plain-terminology — понятный словарь + термин «Prompt version» из #119
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
