@@ -1,0 +1,39 @@
+repository: serhii/dnd-agent2
+commit: 1a23224c8e86cb40a9243887e674a9a83c9a2703
+date: 2026-10-04T22:32:20+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,integration/batch-6,main
+
+message:
+fix: actionable tool-failure messages instead of opaque 'Error: Function failed.' (#110)
+An unhandled exception from a DM tool used to reach the model as MAF's generic
+`Error: Function failed.` — no reason, no next step, so the model retried the
+same call blindly (live repro: four StartCombat calls, ~15 minutes of thinking
+before the turn timed out).
+
+The single tool funnel (DmAgentToolProvider.Record/RecordAsync) now catches the
+exception, logs the full exception (type, message, stack) to
+`<TurnLogDirectory>/tool-failures-YYYY-MM-DD.jsonl` (default reports/llm-turns)
+and returns an actionable `Rejected: <tool> failed (<reason>). <next step>`
+result. The result starts with "Rejected:" so the turn tool-call tracker treats
+the failed call as authorizing no narration.
+
+The next step is tool-aware; for StartCombat it is state-aware:
+- fight in progress -> "Combat is already active. Use AttackRoll / EndCombat."
+- concluded fight   -> "Combat is already over (outcome: Победа). Start a new
+  encounter with DeclareEncounter."
+The outcome is recorded on IGameStateContext.LastCombatOutcome by both
+combat-end paths and cleared by DeclareEncounter / a successful StartCombat.
+StartCombat-in-Combat also gets the clearer refusal wording directly.
+
+Deliberately NOT a gate (ADR-0002): no tool call is refused, only explained —
+a new encounter still starts exactly as before (multi-fight tests unchanged).
+
+Tests: reporter unit tests (reason + hint + log), provider funnel tests for the
+sync and async paths (throwing dice engine / NPC generator), and the
+tool-failure logger's JSONL write + never-throws guarantees.
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
