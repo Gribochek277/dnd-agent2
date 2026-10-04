@@ -1,0 +1,13 @@
+repository: serhii/dnd-agent2
+commit: dfa302a44371cd7e8826306a12330b6cbf5360dd
+date: 2026-10-04T22:10:37+03:00
+author: serhii <serhii@localhost>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,integration/batch-6,main
+
+message:
+Merge pull request 'Батч 2: профиль облачной модели (opencode-go / DeepSeek V4.1 Flash) + стенд полного хода (#123 #116)' (#125) from integration/batch-2 into main
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
