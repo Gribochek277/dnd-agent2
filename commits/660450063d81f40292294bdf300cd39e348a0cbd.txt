@@ -1,0 +1,13 @@
+repository: serhii/dnd-agent2
+commit: 660450063d81f40292294bdf300cd39e348a0cbd
+date: 2026-10-04T21:18:51+03:00
+author: serhii <serhii@localhost>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,integration/batch-6,main
+
+message:
+Батч 1: общий тестовый актив, движок целостности, предохранитель N=3, версия промпта
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
