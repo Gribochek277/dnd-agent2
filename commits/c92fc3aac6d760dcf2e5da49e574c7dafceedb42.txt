@@ -1,0 +1,13 @@
+repository: serhii/dnd-agent2
+commit: c92fc3aac6d760dcf2e5da49e574c7dafceedb42
+date: 2026-10-04T22:06:55+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,integration/batch-6,main
+
+message:
+Merge branch 'feat/116-full-turn-rig' into integration/batch-2
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
