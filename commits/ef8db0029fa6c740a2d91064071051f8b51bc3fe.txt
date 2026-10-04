@@ -1,0 +1,51 @@
+repository: serhii/dnd-agent2
+commit: ef8db0029fa6c740a2d91064071051f8b51bc3fe
+date: 2026-10-05T02:01:52+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,integration/batch-6,main
+
+message:
+Model graders, circularity guard and the full-run report (#127)
+MVP step 5b (epic #113, testing spec §5/§7): the eval harness now judges
+narration with a model, guards against self-checking, and reports a whole
+suite run with an auditable expectation ledger.
+
+Graders (§5):
+- two families — narration (6 criteria) and dm-quality (4) — over the
+  anchored 0-5 scale; pass/score derived IN CODE at threshold 3;
+- structured JSON contract with a verbatim evidence quote; one retry on a
+  broken call, then grader-error; slot timeout defaults to 120 s;
+- rubric + prompt assets in Dnd.Evals/Rubrics/, criteria build id =
+  SHA-256(template + rubric text)[:8];
+- grader slot (endpoint/model/key/timeout) resolved per trial: external
+  wins, otherwise self-grade on the model under test, marked circular.
+
+Circularity guard (§5): anchors are the code graders; trusted only when the
+grader model differs from the model under test AND every anchor passed;
+self-grades are advisory; broken-trial verdicts stay out of quality stats.
+
+Report (§7): SuiteRunner runs every scenario × N trials into
+reports/evals/<run-id>/{report.json,summary.md}; RegressionReporter
+classifies against the latest previous run (regressions, quality drift on
+trusted scores, flaky, broken, known-failing, coverage, per chunk with
+(n=k), attribution as annotation) and prints thresholds in force + the
+awaiting-decision list; exit code 1 only on a blocking regression.
+
+Expectations (§7): append-only reports/evals/expectation-ledger.jsonl;
+Dnd.Evals.Run --accept <scenario> prints the observed diff (diverged
+snapshot paths, failing graders, score changes) and writes the decision but
+NEVER rewrites the scenario's state assertions; the known-failing: <issue>
+marker (bare booleans rejected, stale once the scenario passes) is the
+second known-defect source.
+
+Dnd.Evals.Run also does a single trial and --regrade <trial.json> (re-grade
+a recorded trial with another slot, no conversation replay); make evals /
+make evals-accept wire it up.
+
+76 new deterministic self-tests on fakes and recorded transcripts; no live
+model is contacted in tests. dotnet test Dnd.slnx green.
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
