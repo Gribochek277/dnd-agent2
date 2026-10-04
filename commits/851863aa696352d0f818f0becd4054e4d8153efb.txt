@@ -1,0 +1,32 @@
+repository: serhii/dnd-agent2
+commit: 851863aa696352d0f818f0becd4054e4d8153efb
+date: 2026-10-05T02:26:13+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,integration/batch-6,main
+
+message:
+feat(monsters): two-layer persistent monster alias store (#98)
+Implements the alias dictionary from ADR-0002: a global, setting-agnostic
+layer (fiction name -> canonical SRD monster) plus a per-campaign layer
+(fiction name -> stat block + skin). Both layers are JSON files; both paths
+are injected, so the store never hard-codes the campaign scope (memory scope
+is #23, still open).
+
+- IMonsterAliasStore: Resolve(name) (instant, no LLM, normalized
+  lower-case + transliteration via SrdMonsterStatsCatalog.Transliterate) and
+  RecordResolution(name, resolution). Canonical/template -> global,
+  custom/skin -> per-campaign.
+- MonsterResolution data type keeps the fiction name for #66 rendering.
+- Seed file data/monster-alias-seed.json: 77 RU canonical aliases
+  (incl. "морской дьявол" -> Sahuagin) + 11 folklore role+CR templates.
+  Seed is merged in memory and stays immutable; only learned aliases persist.
+- Unknown names return null (no exception); unreadable files yield an empty
+  layer so the game never blocks.
+
+Wiring into BuildCombatants (#95), ResolveMonster (#99), the StartCombat
+gate (#100) and fiction-name rendering (#66) is out of scope here.
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
