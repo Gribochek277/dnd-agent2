@@ -1,0 +1,38 @@
+repository: serhii/dnd-agent2
+commit: e3906d31cd412394a72a98c71a4f0ebf55ede1a0
+date: 2026-10-04T22:34:48+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,integration/batch-6,main
+
+message:
+Eval harness core: snapshot, scripted dice, scenario loader, trial runner (#126)
+MVP step 5a (G5, testing spec §3/§4/§5): run one eval scenario and grade it with code.
+
+- WorldSnapshot / WorldSnapshotter / SnapshotComparer — coverage exactly by the §3 table
+  (session, state, flags, characters, combat, six memory files); recursive JSON diff in the
+  assertion-path vocabulary, arrays by index, Cyrillic kept readable in diffs and transcripts.
+- ScriptedDiceEngine swaps IDiceEngine: per-expression queues (roll order never matters),
+  fallback fail (default) / fixed / seeded, mirroring production resolution semantics.
+- YamlScenarioLoader maps §4 YAML onto AgentScenario and fails loudly on an unknown aspect,
+  assertion op, narration criterion, invariant, world state, memory topic or dice fallback,
+  and on the reserved pre-started world.combat.
+- WorldSeeder: fresh DI container per trial (production startup graph + AddDndEvals), world
+  seeded only through production paths (character import, memory fact, initial state).
+- AgentEvaluator replays the conversation through the real IDmAgent.SendAsync, records events
+  into a transcript, captures before/after snapshots + diff and writes
+  reports/evals/<scenario-id>/<timestamp>-<mode>.json with the run passport (model, endpoint,
+  IPromptBuilder.GetPromptVersion(), dice seed, clock).
+- Deterministic graders over IGrader: state-assertions, tool-calls, invariants (the #115
+  engine over LIVE state). A trial passes only when every grader passes.
+- Stub mode: in-process OpenAI-compatible endpoint behind the factory seam, so the production
+  HTTP/SSE path runs against canned narration — no live model in any test.
+
+Out of scope here (#127): model graders, the grader slot, suite reporting and the ledger.
+
+Tests: 93 deterministic self-tests in Dnd.Evals (61 new), incl. a full Stub trial end to end;
+`dotnet test Dnd.slnx` green (1370 tests, 0 failures).
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
