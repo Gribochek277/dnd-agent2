@@ -1,0 +1,13 @@
+repository: serhii/dnd-agent2
+commit: 764a6878cc4910e1d97eb8dcc467771e319a73a9
+date: 2026-10-05T02:16:56+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,integration/batch-6,main
+
+message:
+fix(orchestrate): watchdog возвращает 1, пока агенты работают (а не только при застое)
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
