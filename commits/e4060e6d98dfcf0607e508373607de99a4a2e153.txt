@@ -1,0 +1,42 @@
+repository: serhii/dnd-agent2
+commit: e4060e6d98dfcf0607e508373607de99a4a2e153
+date: 2026-10-05T01:55:51+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,integration/batch-6,main
+
+message:
+feat: monster name qualifiers — silent CR correction for catalog hits (#97)
+ADR-0002 «Таблица квалификаторов»: a curated data file maps qualifier words
+(EN + RU) to a CR shift and the shift is applied to the catalog hit before the
+block is rescaled.
+
+- Dnd.DM/data/monster-qualifiers.json (data, not code): spawn/отродье/выродок/
+  fledgling −2; young/молодой −1; dire/dread/giant/гигантский +1;
+  ancient/elder/древний/старый +2.
+- MonsterQualifierTable loads the file fail-safe (missing/corrupt → no
+  correction). MonsterQualifierResolver strips the qualifier words to resolve
+  the base monster ("giant kraken" must not land on a Giant Ape just because
+  "giant" matches a catalog entry first) and sums their shifts. Printed SRD
+  names that merely contain a qualifier word ("Giant Rat", "Young Red Dragon")
+  keep their canonical blocks; unknown extra words change nothing.
+- MonsterStatBlockRescaler rewrites CR/HP/AC/attack with the same-family
+  formula as NpcGeneratorService.BuildFallbackStatBlock (HP ≈ 8 + CR·12 clamped
+  to the validator ceiling, AC midpoint of the CR band, attack = best ability
+  modifier + CR proficiency). Ability scores, size, type, languages and the
+  description that carries the action list survive verbatim.
+- SrdMonsterStatsCatalog applies the correction only to catalog hits; a
+  catalog miss still returns the default block (gate is #100). XP follows the
+  corrected CR (BuildCombatants stores stats.Cr on the combatant).
+- Tests: «Кракен-отродье» → CR 21 (23−2), not 23; young −1; ancient +2;
+  canonical names unchanged; unknown qualifier unchanged; multiple qualifiers
+  sum; the real 334-monster dataset gives CR 21 for «Кракен-отродье»; combat
+  XP follows the corrected CR (51000, not the CR-23 75000).
+
+Dnd.DM.Tests: 532 green. The 8 pre-existing Dnd.CLI.Tests failures
+("SQLite Error 1: table meta already exists", parallel rules.db build) are
+unrelated and reproduce unchanged on the base tree.
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
