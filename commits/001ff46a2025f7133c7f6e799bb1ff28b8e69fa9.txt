@@ -1,0 +1,13 @@
+repository: serhii/dnd-agent2
+commit: 001ff46a2025f7133c7f6e799bb1ff28b8e69fa9
+date: 2026-10-05T01:37:48+03:00
+author: serhii <serhii@localhost>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,integration/batch-6,main
+
+message:
+Merge pull request 'Батч 3: раннер прогонов (снимок мира, кубики, оценщики по коду) + ошибки инструментов (#126 #110)' (#128) from integration/batch-3 into main
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
