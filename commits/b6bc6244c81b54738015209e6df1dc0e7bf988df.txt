@@ -1,0 +1,13 @@
+repository: serhii/dnd-agent2
+commit: b6bc6244c81b54738015209e6df1dc0e7bf988df
+date: 2026-10-05T02:16:39+03:00
+author: serhii <serhii@localhost>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,integration/batch-6,main
+
+message:
+Merge pull request 'Квалификаторы имён монстров (ADR-0002) + идемпотентный билд базы правил (#97 #129)' (#131) from feat/97-monster-qualifiers into main
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
