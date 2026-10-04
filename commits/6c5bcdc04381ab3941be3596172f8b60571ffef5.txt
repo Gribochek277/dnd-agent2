@@ -1,0 +1,39 @@
+repository: serhii/dnd-agent2
+commit: 6c5bcdc04381ab3941be3596172f8b60571ffef5
+date: 2026-10-04T21:42:28+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,integration/batch-6,main
+
+message:
+test: full-turn rig — player input → agent → tools → narration (#116)
+Gap G3 from the #105 testing audit (epic T #113, MVP step 3): the component
+layer knew only sub-decisions of the model; there was no test that played a
+whole DM turn. ChatClientAgentStreamSourceTests drives the streaming loop on
+fakes, but never the agent + tools + state path.
+
+Add a reusable FullTurnRig (Dnd.CLI.Tests/Support) that runs ONE real turn
+through the real IDmAgent — LlmClient, ChatClientAgentStreamSource, a real
+ChatClientAgent and the real DmAgentToolProvider tools — against a scripted
+model and scripted dice. The real classifier/adjudicator stay in the graph and
+answer from a fake verdict, so enforcement behaves as in production. Only three
+seams are scripted: the tool-calling agent model, the dice, and the
+non-streaming sub-model calls. No live model, no network.
+
+Shared assets (TestSupport/, linked into Dnd.CLI.Tests):
+- ScriptedChatClient  — streaming model replaying tool calls then narration
+- ScriptedDiceEngine  — dice queues keyed by expression (spec §4)
+- FakeOpenAiChatClientFactory — sub-model calls served by the shared FakeChatClient
+- NullTurnDiagnosticsLogger — keeps a turn test from writing JSONL files
+
+Tests, one per aspect with a component form:
+- FullTurnConversationTests — conversational turn: narration, no tool call
+- FullTurnCombatTests — attack in Exploration: StartCombat + AttackRoll change state
+- FullTurnCheckTests — requested check/save: AssignDC + TriggerSave, typed result
+  (covers ability check and saving throw)
+
+dotnet test Dnd.slnx green (1262 tests).
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
