@@ -1,0 +1,13 @@
+repository: serhii/dnd-agent2
+commit: da59d8bac36fc0787137d7346cf8b6da2fd6f22e
+date: 2026-10-04T22:25:20+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,integration/batch-6,main
+
+message:
+docs(smoke): язык размышлений модели не важен — требование только к языку ответа (#124)
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
