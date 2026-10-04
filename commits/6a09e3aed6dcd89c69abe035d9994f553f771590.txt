@@ -1,0 +1,31 @@
+repository: serhii/dnd-agent2
+commit: 6a09e3aed6dcd89c69abe035d9994f553f771590
+date: 2026-10-04T22:05:25+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,integration/batch-6,main
+
+message:
+fix: opencode-go session header and application User-Agent (#123)
+The opencode-go gateway rejects requests that lack an x-opencode-session
+header (HTTP 400 MissingSessionID) and asks callers to send their own
+User-Agent. Neither was set, so the cloud profile could not talk to the
+gateway.
+
+- Add a before-transport pipeline policy (LlmRequestHeaderPolicy) that
+  stamps x-opencode-session and User-Agent: dnd-agent2/1.0 for the
+  opencode-go provider only; the local llama.cpp profile is untouched.
+- The conversation id is stable per session: it comes from the game
+  session id (IGameStateContext.SessionId, generated once at session
+  start) via GameSessionIdProvider registered in Dnd.DM, with a
+  process-stable fallback (StableSessionIdProvider) in Dnd.Core. The
+  session id is resolved per request, so it is correct even when the
+  client is built before the session starts.
+- Extract OpenAI client options construction into
+  OpenAiClientOptionsFactory so the header path is testable end-to-end.
+- Tests: header policy per profile, wire-level headers over a fake
+  HttpMessageHandler, session-id stability, and DI registration.
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
