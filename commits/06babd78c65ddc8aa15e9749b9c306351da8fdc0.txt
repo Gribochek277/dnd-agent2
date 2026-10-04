@@ -1,0 +1,13 @@
+repository: serhii/dnd-agent2
+commit: 06babd78c65ddc8aa15e9749b9c306351da8fdc0
+date: 2026-10-04T21:24:00+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,integration/batch-6,main
+
+message:
+docs: оркестрация разработки — батчи в Herdr, роли, проверка, границы автономии (AGENTS.md → указатель)
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
