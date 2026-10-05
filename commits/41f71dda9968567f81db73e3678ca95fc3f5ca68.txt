@@ -1,0 +1,14 @@
+repository: serhii/dnd-agent2
+commit: 41f71dda9968567f81db73e3678ca95fc3f5ca68
+date: 2026-10-05T04:40:28+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: integration/batch-7,main
+
+message:
+docs: отчёт живого пилота набора на облачной модели + находки (#121 → #137 #138 #139)
+
+---
+Source code is NOT published on GitHub.
+My code is hosted on a private server - this repository only reflects my working activity.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
