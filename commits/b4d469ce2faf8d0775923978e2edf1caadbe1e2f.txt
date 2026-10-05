@@ -1,0 +1,30 @@
+repository: serhii/dnd-agent2
+commit: b4d469ce2faf8d0775923978e2edf1caadbe1e2f
+date: 2026-10-05T07:34:45+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: main
+
+message:
+fix(narration): distinguish player action from asserted world fact in RetryWorldFact gate (#144)
+The world-authority safety net fired whenever the DM narration mentioned an
+entity the player had named, so a real turn — «Попросить Хельгу дать прочитать
+записку», a note the DM itself brought into the scene — was sent back as
+RetryWorldFact on pass 0 and cost a whole extra thinking-heavy pass (#143).
+
+Split the verifier verdict into the two halves of the question:
+playerClaimsWorldFact (is the PLAYER's message an ASSERTION about the world —
+«это мой амулет», «я вижу монстра» — rather than an action, request or question
+about an entity the DM already introduced) and confirmsWorldFacts (does the
+narration echo that asserted fact as established truth). TurnPassAdjudicator now
+requires BOTH, so a genuine asserted-and-confirmed claim still retries while
+acting on an existing entity is accepted; the shadow comparison tracks the split
+so the old regex path no longer diverges on such turns.
+
+Tests: adjudicator gate, stream-source one-pass and verdict-parser split; the two
+behaviour tests fail against the old gate. dotnet test Dnd.slnx green (1584).
+
+---
+Source code is NOT published on GitHub.
+My code is hosted on a private server - this repository only reflects my working activity.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
