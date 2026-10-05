@@ -1,0 +1,14 @@
+repository: serhii/dnd-agent2
+commit: a09a2b6d68eac46d2e99ce7e0ad45e3365ea095c
+date: 2026-10-05T07:28:20+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: main
+
+message:
+merge: #139 dm fairness (CHANGELOG union)
+
+---
+Source code is NOT published on GitHub.
+My code is hosted on a private server - this repository only reflects my working activity.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
