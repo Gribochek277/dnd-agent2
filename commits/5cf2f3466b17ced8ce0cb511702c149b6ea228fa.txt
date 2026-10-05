@@ -1,0 +1,14 @@
+repository: serhii/dnd-agent2
+commit: 5cf2f3466b17ced8ce0cb511702c149b6ea228fa
+date: 2026-10-05T07:40:31+03:00
+author: serhii <serhii@localhost>
+branches: main
+
+message:
+Merge pull request 'Батч 9: скрыть размышления по умолчанию + убрать ложный ретрай верификатора (#143 #144)' (#146) from integration/batch-9 into main
+
+---
+Source code is NOT published on GitHub.
+My code is hosted on a private server - this repository only reflects my working activity.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
