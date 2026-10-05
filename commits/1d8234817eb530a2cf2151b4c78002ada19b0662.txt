@@ -1,0 +1,32 @@
+repository: serhii/dnd-agent2
+commit: 1d8234817eb530a2cf2151b4c78002ada19b0662
+date: 2026-10-06T02:23:43+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: ticket/01-narration-pass-stitching
+
+message:
+feat(npc): light JSON sub-request + catalog-first for GenerateNPC (#96)
+The GenerateNPC sub-request ran the full DM agent (system prompt with rules,
+all DM tools, thinking, adjudication, watchdog): 50-90s per enemy and a latent
+risk of a background generation invoking a game tool. Split it into a light
+JSON profile and add a catalog-first fast path.
+
+- New INpcSubRequestClient/NpcSubRequestClient: a plain chat completion with
+  no tools, thinking forced off, a 1000-token output budget and a 60s timeout.
+  NpcGeneratorService owns parsing, validation and the bounded 3-attempt loop.
+- Catalog-first: NpcGeneratorService consults IMonsterStatsCatalog first and
+  returns the canonical SRD block with zero LLM requests when the name resolves;
+  only an unknown name reaches the light client.
+- DI: register INpcSubRequestClient; NpcGeneratorService takes the catalog.
+- Tests: catalog hit with a throwing fake client (LLM never called), catalog
+  miss falling through, and the light-profile request shape (no tools,
+  enable_thinking false, small max_tokens/MaxOutputTokens, bounded timeout).
+- Diagnostics shrink from a full TurnDiagnosticsRecord to short npc trace lines.
+
+dotnet test Dnd.slnx green (1623 tests).
+
+---
+Source code is NOT published on GitHub.
+My code is hosted on a private server - this repository only reflects my working activity.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
