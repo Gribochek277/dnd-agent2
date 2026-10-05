@@ -1,0 +1,14 @@
+repository: serhii/dnd-agent2
+commit: 247acb61af3ad3d058c5ce9c1ab325ad05ab16c2
+date: 2026-10-05T05:02:07+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: integration/batch-7,main
+
+message:
+merge: #67 level-up features (CHANGELOG union)
+
+---
+Source code is NOT published on GitHub.
+My code is hosted on a private server - this repository only reflects my working activity.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
