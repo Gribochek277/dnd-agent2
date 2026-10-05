@@ -1,0 +1,13 @@
+repository: serhii/dnd-agent2
+commit: ddc6baefa16c381e05b73ab19a835fd45cf81be6
+date: 2026-10-05T03:32:58+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: fix/134-harness-api-key,integration/batch-6,main
+
+message:
+fix(evals): ключ из окружения и заголовки opencode-go в прогоне — модель и слот оценщика больше не падают 401/400 (#134)
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
