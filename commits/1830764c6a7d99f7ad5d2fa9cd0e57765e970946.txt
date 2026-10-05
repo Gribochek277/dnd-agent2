@@ -1,0 +1,39 @@
+repository: serhii/dnd-agent2
+commit: 1830764c6a7d99f7ad5d2fa9cd0e57765e970946
+date: 2026-10-05T04:59:36+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/100-startcombat-gate,integration/batch-7,main
+
+message:
+feat(combat): bounded StartCombat gate for unresolved enemy names (#100)
+ADR-0002 §«Жёсткий гейт»: StartCombat no longer lets a name that missed the
+resolution chain (alias dictionary → declared DM block → catalog + qualifiers)
+silently fall to the legacy default block. The whole call is now rejected with a
+deterministic, LLM-free message listing the unresolved names and telling the DM
+to call ResolveMonster(name) or GenerateNPC(name, role, cr) first.
+
+- `IMonsterStatsCatalog.TryGetStats` makes a catalog miss detectable without
+  changing the legacy `GetStats` default-block contract.
+- `IMonsterResolutionGate` / `MonsterResolutionGate` (DI singleton, shared by
+  the StartCombat tool and the system fallback) bounds the loop to 2 rejections
+  per name per fight; after that the name gets a deterministic CR-scaled block
+  (CR = rounded average party level, `IMonsterStatBlockRescaler.RescaleToCr`)
+  and combat starts anyway (#63).
+- Visible escalation: the fallback block rides on
+  `CombatStartResult.Fallbacks` → `CombatStartResultPayload.Fallbacks` and the
+  formatter renders a localized system row (`GetMonsterFallbackLine`, #38).
+- The system fallback (#27) uses `TryStartCombatWithEscalation`: it has no DM
+  model to re-request, so it escalates immediately and never blocks.
+
+Tests cover the structured rejection, the 3rd-attempt escalation with the
+party-level block, the visible escalation row (DM + localizer + formatter), a
+resolved name passing the gate, mixed calls, many unresolved names, duplicate
+counting, per-name budget clearing and the immediate system-fallback escalation.
+
+dotnet test Dnd.slnx green (1570 tests).
+
+---
+Source code is NOT published on GitHub.
+My code is hosted on a private server - this repository only reflects my working activity.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
