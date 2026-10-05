@@ -1,0 +1,32 @@
+repository: serhii/dnd-agent2
+commit: 467319c7bbc1ce58668144c6f71a12917054c2d5
+date: 2026-10-05T07:35:20+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: main
+
+message:
+feat(cli): hide model reasoning by default, show on request (#143)
+The thinking stream used to render unconditionally at every InputLoop call
+site, so a cloud model's English chain-of-thought — with long runs of blank
+lines — flooded the screen before the narration arrived.
+
+The reasoning block is now hidden by default and shown on request:
+
+- `--thinking` at startup seeds `Thinking:Enabled=true`
+- `/thinking on|off` flips the toggle mid-session
+
+When shown, runs of blank lines collapse to at most one separator (leading
+blanks dropped) and the block stops at a 3000-character display budget with
+a one-line notice pointing at the full record.
+
+Hiding is display-only: the model still reasons and the full text still
+lands in reports/llm-turns (the stream source records the reasoning segment
+before `onThinking` fires). New `IThinkingDisplay` singleton gates
+`DmStreamRenderer.WriteThinkingAsync`; tests cover the hidden default, the
+enabled path, blank-line collapsing, the budget and the narration path.
+
+---
+Source code is NOT published on GitHub.
+My code is hosted on a private server - this repository only reflects my working activity.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
