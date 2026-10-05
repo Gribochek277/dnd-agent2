@@ -1,0 +1,24 @@
+repository: serhii/dnd-agent2
+commit: f58496813c7ad69de1591a74763a8a39e14ba61d
+date: 2026-10-06T02:47:41+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: ticket/01-narration-pass-stitching
+
+message:
+fix(narration): буферизовать проход до вердикта — отклонённый текст не склеивается (#141)
+Каждый проход модели стримился игроку живьём ещё до вердикта надзирателя,
+поэтому отклонённый текст уже ушёл в ответ, а исправленный дописывался следом
+(narration coherent=2 в живых прогонах). Наррация теперь буферизуется на проход
+и отдаётся игроку только при Accept (токен за токеном); в остальных ветках —
+ровно один терминальный фолбэк. Рассуждения и события инструментов остаются
+живым каналом.
+
+Тесты стриминга обновлены осознанно: до игрока доходит только принятый проход,
+есть тест на перезапрос; отдельный разбор живого прогона —
+reports/141-narration-pass-stitching-2026-10-05.md.
+
+---
+Source code is NOT published on GitHub.
+My code is hosted on a private server - this repository only reflects my working activity.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
