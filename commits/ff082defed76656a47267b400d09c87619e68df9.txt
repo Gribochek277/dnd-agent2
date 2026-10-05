@@ -1,0 +1,31 @@
+repository: serhii/dnd-agent2
+commit: ff082defed76656a47267b400d09c87619e68df9
+date: 2026-10-05T03:35:58+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,integration/batch-6,main
+
+message:
+feat(monsters): route declared GenerateNPC blocks into combat resolution (#95)
+ADR-0002 step 2 — the declared DM block now reaches the single resolution
+point instead of being discarded.
+
+- GenerateNpcTool records the validated stat block into the per-campaign
+  layer of the monster alias store (persistent declared block), so the
+  result travels structurally rather than as narration text.
+- DmAgentToolDeps.BuildCombatants resolves enemies through a new
+  ResolveEnemyStats: alias dictionary -> declared block -> SRD catalog +
+  qualifiers. The declared block wins over the catalog default; a catalog
+  name still resolves from the catalog; a template hit with no block (and
+  an unknown name) keeps the legacy default until #99/#100.
+- XP follows the final CR: the declared block's CR is what CombatState
+  uses (covered by a test).
+- Register IMonsterAliasStore in AddDndDM (global + campaign files, RU
+  seed merged) and thread it through DmAgentToolProvider.
+
+Tests: generated 13-HP block reaches combat (not the 10-HP default),
+catalog names unchanged, unknown/template names unchanged, XP by declared CR.
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
