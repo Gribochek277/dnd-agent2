@@ -1,0 +1,13 @@
+repository: serhii/dnd-agent2
+commit: 20624ac3e94aff3abf7a9cff8cc6c45ea76c61d3
+date: 2026-10-05T03:33:14+03:00
+author: serhii <serhii@localhost>
+branches: integration/batch-6,main
+
+message:
+Merge pull request 'Прогон на облачной модели: ключ из окружения и заголовки провайдера (#134)' (#135) from fix/134-harness-api-key into main
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
