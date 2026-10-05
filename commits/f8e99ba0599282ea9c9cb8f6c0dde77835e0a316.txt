@@ -1,0 +1,13 @@
+repository: serhii/dnd-agent2
+commit: f8e99ba0599282ea9c9cb8f6c0dde77835e0a316
+date: 2026-10-05T03:11:22+03:00
+author: serhii <serhii@localhost>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,integration/batch-6,main
+
+message:
+Merge pull request 'Двухслойный словарь алиасов монстров (#98)' (#132) from feat/98-alias-dictionary into main
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
