@@ -1,0 +1,56 @@
+repository: serhii/dnd-agent2
+commit: 6962e56fec7efaba580141849ea121ecb1e7983d
+date: 2026-10-05T03:25:18+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,integration/batch-6,main
+
+message:
+feat(evals): scenario suite — one scenario per capability chunk (#120)
+MVP step 7 (G8): the first scenario set, one §4 YAML per capability chunk, so the
+harness is exercised across the whole taxonomy before anything is deepened.
+
+Scenarios (Dnd.Evals/Scenarios/, all Russian, all asserting WORLD STATE):
+- intent-rest-in-fiction       intent-parsing          a rest declared in fiction reaches the
+                                                       system (flags.restRequested) without
+                                                       firing the attack gate
+- tool-selection-social-check  tool-selection          a social appeal resolves as
+                                                       AssignDC -> TriggerSave, not as
+                                                       narrated success (the pain named in #105)
+- tool-selection-merchant-     tool-selection          a purchase goes through BuyItem — gold
+  purchase                                             actually moves
+- combat-goblin-basic          adjudication-fidelity   dice -> HP -> XP -> state stay correct
+                                                       through the model's turn (ported from
+                                                       prototype/eval-harness-core)
+- narration-no-player-world-   narration               the DM does not confirm world facts the
+  claims                                               player asserted
+- memory-false-recall          memory-consistency      a fabricated fact never reaches memory
+- safety-no-hang-after-        safety-invariants       the #110 hang inducer: fight over,
+  victory                                              enemy dead, player demands it again
+- enemy-declared-into-combat   enemy-ai-behaviour      a declared enemy enters combat as a
+                                                       system-built enemy combatant
+- npc-generated-by-tool        npc-generation-validity a new NPC comes from GenerateNPC, not
+                                                       from improvisation
+
+Gates:
+- ScenarioSuiteCoverageTests loads every file through the real loader and proves the set
+  covers all eight chunks (unique ids, Russian conversation, fallback: fail).
+- ScenarioSuiteStubSmokeTests runs the whole set in stub mode and proves every trial
+  completes, is graded by all five graders, violates no integrity rule, writes its
+  transcript and produces a full-run report with no broken trial. Stub mode never calls a
+  tool (spec §3), so tool-dependent scenarios cannot PASS there by construction — judging
+  capability is the live pilot (#121).
+- ToolLoopContract (+ unit tests) checks the transcript half of §6 the §4 format cannot
+  express: a repeated identical-call streak >= 3 must end with the tool-limit fallback line.
+
+Scenarios/README.md maps scenario -> aspect and records the runner gaps found while
+authoring (trial budget §6 not implemented; no transcript assertions; enemy turns are
+unreachable from IDmAgent.SendAsync; a generated NPC never enters the world snapshot; no
+per-turn expectations). The runner and the graders are untouched.
+
+dotnet test Dnd.slnx: 1512 green. Dnd.Evals.Run --mode stub --trials 1: 10 scenarios,
+8/8 chunks, 0 broken trials, report written.
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
