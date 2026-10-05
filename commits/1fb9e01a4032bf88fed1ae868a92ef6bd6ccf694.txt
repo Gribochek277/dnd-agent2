@@ -1,0 +1,37 @@
+repository: serhii/dnd-agent2
+commit: 1fb9e01a4032bf88fed1ae868a92ef6bd6ccf694
+date: 2026-10-05T03:41:59+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/99-resolve-monster,integration/batch-6,main
+
+message:
+feat(monsters): ResolveMonster tool + no-thinking sub-request (#99)
+Implements the resolver from ADR-0002: a dedicated lightweight LLM
+sub-request decides how an unknown fiction name resolves, and the result
+is persisted in the two-layer alias dictionary (pay-once per name).
+
+- IMonsterResolver/MonsterResolver: dictionary hit -> instant return;
+  otherwise one decision sub-request (path A canonical match) or
+  NpcGeneratorService (path B generation).
+- IMonsterMatchDecisionClient/MonsterMatchDecisionClient: no-thinking
+  completion (ADR-0001 3), small output budget, own timeout, bounded
+  CR-filtered candidate shortlist, catalog validation of the chosen
+  canonical name, fail-open to null.
+- Persistence: canonical -> global layer; custom block/skin ->
+  per-campaign layer. Fallback blocks (IsFallback) are never persisted.
+- Seed Template aliases (role+CR, no block) are generated once and
+  upgraded to a custom campaign entry.
+- ResolveMonsterTool registered in DmAgentToolProvider; the campaign
+  setting (adventure seed) and party level are read from game state.
+- Tests (fake model, no live endpoint): canonical -> global, custom ->
+  campaign, pay-once, model failure -> fallback without throwing,
+  hallucinated canonical -> generation, template upgrade and the
+  no-thinking request shape.
+
+Wiring into BuildCombatants (#95), the StartCombat gate (#100) and
+fiction-name rendering (#66) stay out of scope.
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
