@@ -1,0 +1,14 @@
+repository: serhii/dnd-agent2
+commit: 3855f360d1be0bc8ed4b67a3a3801f594782491f
+date: 2026-10-05T07:40:29+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: main
+
+message:
+fix(tests): фикстура NarrationVerdict доучена параметру PlayerClaimsWorldFact (семантический конфликт #143×#144)
+
+---
+Source code is NOT published on GitHub.
+My code is hosted on a private server - this repository only reflects my working activity.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
