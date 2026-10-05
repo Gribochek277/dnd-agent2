@@ -1,0 +1,14 @@
+repository: serhii/dnd-agent2
+commit: 4cf2d38a63568055efa64eb7aae26d4f3397cfac
+date: 2026-10-05T04:36:57+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: feat/100-startcombat-gate,feat/67-levelup-features,integration/batch-7,main
+
+message:
+merge: #99 resolve monster (union в провайдере инструментов)
+
+---
+Source code is NOT published on GitHub.
+My code is hosted on a private server - this repository only reflects my working activity.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
