@@ -1,0 +1,13 @@
+repository: serhii/dnd-agent2
+commit: 49074fbbd4ed1bf82769ada6b29fa011dd0e483a
+date: 2026-10-05T03:26:40+03:00
+author: serhii <serhii@localhost>
+branches: feat/95-combatant-wiring,feat/99-resolve-monster,fix/134-harness-api-key,integration/batch-6,main
+
+message:
+Merge pull request 'Набор сценариев: по одному на каждый из 8 аспектов (#120)' (#133) from feat/120-scenario-suite into main
+
+---
+Source code is NOT published on GitHub.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
