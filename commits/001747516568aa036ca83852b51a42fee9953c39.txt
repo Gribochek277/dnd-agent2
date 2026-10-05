@@ -1,0 +1,14 @@
+repository: serhii/dnd-agent2
+commit: 001747516568aa036ca83852b51a42fee9953c39
+date: 2026-10-05T05:02:01+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: integration/batch-7,main
+
+message:
+Merge branch 'feat/100-startcombat-gate' into integration/batch-7
+
+---
+Source code is NOT published on GitHub.
+My code is hosted on a private server - this repository only reflects my working activity.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
