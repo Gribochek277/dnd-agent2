@@ -1,0 +1,14 @@
+repository: serhii/dnd-agent2
+commit: b86efc0998bbbe54080a493ee3be548a1fca241b
+date: 2026-10-06T02:28:17+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: main
+
+message:
+chore(orchestrate): конфиг оркестратора в git; генерируемые артефакты прогонов в .gitignore
+
+---
+Source code is NOT published on GitHub.
+My code is hosted on a private server - this repository only reflects my working activity.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
