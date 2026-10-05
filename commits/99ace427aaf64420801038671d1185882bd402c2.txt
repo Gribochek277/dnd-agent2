@@ -1,0 +1,32 @@
+repository: serhii/dnd-agent2
+commit: 99ace427aaf64420801038671d1185882bd402c2
+date: 2026-10-05T05:16:45+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: main
+
+message:
+feat(evals): разделение stub/live — baseline по режиму и stub-only сценарии (#138)
+Живой прогон сравнивался с предыдущим, а им оказался stub-прогон:
+отсюда мусорная ATTRIBUTION «model changed: stub → …» и ложная
+регрессия на stub-pipeline-check (в live он пройти не может).
+
+- BaselineSelector: автоматический baseline — последний прогон ТОГО ЖЕ
+  режима (ISuiteRunStore.FindLatestRunDirectory(..., requiredMode));
+  stub-прогон не выбирается как baseline живого; других нет → baseline: none.
+  Явный --baseline остаётся и может пересекать режимы.
+- EvalReport.BaselineMode/BaselineCrossMode: сравнение разных режимов
+  помечено CROSS-MODE в CLI-отчёте и summary.md.
+- AgentScenario.StubOnly + YAML stub-only: ScenarioSuiteSelector исключает
+  stub-only из живого набора, stub-прогон их гоняет; stub-pipeline-check помечен.
+- ScenarioCatalog применяет селектор по settings.Mode.
+- Тесты: BaselineSelectorTests (выбор пропускает stub, явный override),
+  живой набор без stub-only, CROSS-MODE в отчёте, разбор YAML-маркера.
+- docs/testing-spec.md §3/§4/§7, CONTEXT.md, CHANGELOG.md.
+
+dotnet test Dnd.slnx: 1592 зелёных.
+
+---
+Source code is NOT published on GitHub.
+My code is hosted on a private server - this repository only reflects my working activity.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com

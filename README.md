@@ -1,7 +1,7 @@
 > Sanitized mirror of Forgejo `serhii/dnd-agent2`. Source code is not published here.
 >
 > Commit texts: `commits/`. Need the code? Email: sergeyalpatov1@gmail.com
-> Source: Forgejo `serhii/dnd-agent2` | Synced: 2026-10-05T02:02:59Z
+> Source: Forgejo `serhii/dnd-agent2` | Synced: 2026-10-05T23:28:23Z
 
 ---
 
@@ -104,6 +104,21 @@ make run-cloud
 
 `make run-cloud` runs the CLI against `opencode-go-deepseek` and refuses to start when no
 key is set.
+
+### Reasoning (thinking) display
+
+The model's reasoning block is **hidden by default** so the narration is not buried under a
+stream of English chain-of-thought. The model still reasons — hiding is display-only, and
+the full text is always recorded in `reports/llm-turns`. Show it at startup with the
+`--thinking` flag:
+
+```bash
+dotnet run --project Dnd.CLI -- --thinking
+```
+
+or flip it mid-session with `/thinking on|off` (the block is capped at 3000 displayed
+characters per turn and runs of blank lines collapse to a single separator, so a
+paragraph-gap-happy model cannot flood the screen).
 
 ## Features
 
