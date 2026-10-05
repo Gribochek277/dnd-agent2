@@ -1,0 +1,14 @@
+repository: serhii/dnd-agent2
+commit: c5adf2e9a0e723146aa5620e6c07684e244788d0
+date: 2026-10-05T05:02:51+03:00
+author: serhii <serhii@localhost>
+branches: main
+
+message:
+Merge pull request 'Батч 7: гейт StartCombat + точные фичи на level-up (#100 #67)' (#140) from integration/batch-7 into main
+
+---
+Source code is NOT published on GitHub.
+My code is hosted on a private server - this repository only reflects my working activity.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
