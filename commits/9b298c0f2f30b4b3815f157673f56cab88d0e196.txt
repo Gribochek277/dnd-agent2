@@ -1,0 +1,38 @@
+repository: serhii/dnd-agent2
+commit: 9b298c0f2f30b4b3815f157673f56cab88d0e196
+date: 2026-10-05T05:36:14+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: main
+
+message:
+fix(dm): fair combat — state-aware tool guidance, no self-attack, turn-scoped enforcement (#139)
+Live `enemy-declared-into-combat` scored `fair: 2` (0/3): a rejected AttackRoll
+answered with the false instruction «call StartCombat first» while combat was
+already active, so the model oscillated AttackRoll/DeclareEncounter/StartCombat
+until the turn ended in a system note.
+
+- ToolFailureReporter: state-aware guidance for AttackRoll/ApplyDamage/Heal —
+  during an active fight never send the model back to StartCombat; forbid the
+  repeat and point at the real state. Combat-not-active still points at
+  DeclareEncounter + StartCombat.
+- AttackRollTool: reject a self-attack (target == current combatant) — the tool
+  always rolls for the acting combatant, so the DM's attempt to resolve an
+  enemy's bite by targeting the player would silently become a self-hit.
+- PromptBuilder: turn ownership — one turn resolves only the acting combatant's
+  action; the system runs the other combatants' turns.
+- ChatClientAgentStreamSource: make StartCombat/DeclareEncounter requirements
+  turn-scoped — once satisfied in an earlier pass, a corrective pass is no
+  longer forced to repeat it (removes the false «combat did not start» note).
+
+Live re-run: fair 5/5/5, dm-quality PASS 3/3; full pass 1/3 (remaining blocker
+is the deliberate live streaming of rejected passes, #141, fed by the
+under-scripted scenario dice, #137). Non-consecutive repeat limit assessed but
+not implemented (#142). `dotnet test Dnd.slnx` green (1585).
+
+Report: reports/139-dm-fairness-2026-10-05.md
+
+---
+Source code is NOT published on GitHub.
+My code is hosted on a private server - this repository only reflects my working activity.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
