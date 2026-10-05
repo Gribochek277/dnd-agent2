@@ -1,0 +1,14 @@
+repository: serhii/dnd-agent2
+commit: a0734e66ca0cc2da11bedfee94c21d7bb256bbe7
+date: 2026-10-05T07:29:22+03:00
+author: serhii <serhii@localhost>
+branches: main
+
+message:
+Merge pull request 'Батч 8: находки пилота — бой-сценарии, stub/live, справедливость DM (#137 #138 #139)' (#145) from integration/batch-8 into main
+
+---
+Source code is NOT published on GitHub.
+My code is hosted on a private server - this repository only reflects my working activity.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
