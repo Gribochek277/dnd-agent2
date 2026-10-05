@@ -1,0 +1,14 @@
+repository: serhii/dnd-agent2
+commit: 87ff505e024e8822480661303e51ce3d28c12711
+date: 2026-10-06T02:28:22+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: ticket/01-narration-pass-stitching
+
+message:
+Merge ticket 03: 03-generate-npc-light-profile
+
+---
+Source code is NOT published on GitHub.
+My code is hosted on a private server - this repository only reflects my working activity.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
