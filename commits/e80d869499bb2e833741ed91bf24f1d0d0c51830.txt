@@ -1,0 +1,14 @@
+repository: serhii/dnd-agent2
+commit: e80d869499bb2e833741ed91bf24f1d0d0c51830
+date: 2026-10-06T05:40:32+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: main
+
+message:
+docs: приёмка — сессия 20 ходов пройдена, живой прогон 8 аспектов идёт итерация (06/08/09 влиты, 07 в работе)
+
+---
+Source code is NOT published on GitHub.
+My code is hosted on a private server - this repository only reflects my working activity.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
