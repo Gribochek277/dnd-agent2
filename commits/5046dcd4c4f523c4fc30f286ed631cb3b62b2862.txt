@@ -1,0 +1,34 @@
+repository: serhii/dnd-agent2
+commit: 5046dcd4c4f523c4fc30f286ed631cb3b62b2862
+date: 2026-10-06T04:30:26+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: main
+
+message:
+fix(dm): скрытые черты NPC не выдаются как факт (ticket 08)
+Живой прогон npc-generated-by-tool валил no-false-certainty (score 2):
+DM представлял сгенерированного NPC, утверждая скрытую деталь как факт
+(«Левая рука в перчатке без двух пальцев»), хотя персонаж не мог её
+воспринять. coherent при этом был 5 — проблема только в уверенности.
+
+Правило зафиксировано в промпте и в инструменте:
+- PromptBuilder: контракт «Hidden NPC traits and unobserved behaviour» —
+  статблок сгенерированного NPC это знание DM, а не игрока; открыто
+  описывается только воспринимаемое, скрытая черта либо подаётся как
+  подмеченная неопределённость, либо не называется, либо открывается
+  только через AssignDC → TriggerSave (Восприятие/Проницательность).
+  То же для невидимого поведения: как NPC будет драться, сколько раз
+  бьёт, что сделает дальше — догадка по наблюдаемым признакам, не факт.
+- GenerateNpcTool: поля Secret/Motivation/Current goal помечены hidden /
+  not player knowledge в результате и в описании инструмента.
+
+Покрытие: prompt-rule тест + два теста GenerateNPC; dotnet test Dnd.slnx
+зелёный (1640). Живой прогон npc-generated-by-tool (deepseek-v4.1-flash,
+внешний qwen3.8-flash grader, 3 trial): 3/3 PASS, no-false-certainty
+5/5/5, coherent 5/5/5.
+
+---
+Source code is NOT published on GitHub.
+My code is hosted on a private server - this repository only reflects my working activity.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
