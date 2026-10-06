@@ -1,0 +1,22 @@
+repository: serhii/dnd-agent2
+commit: eabfa73f16be749ecc92cc85f9c8ed877ea7c86b
+date: 2026-10-06T19:57:28+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: ticket/23-campaign-post-tpk-continues
+
+message:
+feat(evals): падение партии останавливает кампанийный прогон (ticket 23)
+После TPK кампанийный прогон больше не продолжает обычные ходы: новый
+IPartyFallenMonitor/PartyFallenMonitor зеркалит CLI-переход
+Combat → CharacterDeath → GameOver, раннер спрашивает его после каждого
+хода и останавливается с явным исходом CampaignOutcome.PartyFallen.
+
+- CampaignRunResult.Outcome (completed/party-fallen/aborted) пишется в transcript.json
+- сводка пилота: колонка «Исход» + секция «Остановки прогонов»
+- 9 новых тестов; dotnet test Dnd.slnx зелёный (1809)
+
+---
+Source code is NOT published on GitHub.
+My code is hosted on a private server - this repository only reflects my working activity.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
