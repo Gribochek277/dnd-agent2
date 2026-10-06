@@ -1,0 +1,43 @@
+repository: serhii/dnd-agent2
+commit: 2934776481f04690da5f5d66e37fe54a9526914e
+date: 2026-10-06T06:41:56+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: main
+
+message:
+fix(dm): объявленный отдых не перебивается случайным энкаунтером (ticket 10)
+Живой прогон intent-rest-in-fiction на deepseek-v4.1-flash оставался 2/3:
+модель дважды вызывала TriggerRandomEncounter вместо доведения отдыха до Rest.
+Тикет 07 запретил DeclareEncounter/StartCombat при живом запросе на отдых, но
+оставил лазейку — успешный TriggerRandomEncounter снимал этот запрет, так что
+выпавший энкаунтер превращал отдых в засаду, а flags.restRequested не держался.
+
+Починено в двух слоях:
+
+- Детерминированный гейт (DmAgentToolDeps.DescribeRestEncounterBlock): пока жив
+  RestRequested, TriggerRandomEncounter отклоняется ДО броска — кубики не
+  тратятся, мир не двигается. DescribeRestCombatBlock больше не считает энкаунтер,
+  выпавший по инициативе модели, прерыванием отдыха. Провенанс
+  ICheckContext.RandomEncounterTriggeredThisTurn и его сброс в BeginTurn удалены
+  вместе с лазейкой, для которой существовали. Системная периодическая проверка
+  энкаунтеров не затронута; засада во время уже установившегося отдыха
+  (переход Rest → Combat из CONTEXT.md) по-прежнему возможна на следующем ходу,
+  после того как система потребила запрос.
+- Устойчивость классификатора (LlmPlayerIntentClassifier): вторая половина флака
+  (flags.restRequested=false на одной из трёх попыток при дословном примере из
+  промпта) — это транзиентный сбой классификатора, поэтому неудачная попытка
+  (транспортная ошибка, таймаут, нечитаемый вердикт) повторяется один раз перед
+  fail-open. Настоящий вердикт, включая other, не перезапрашивается; всё
+  ограничено 2 × 12 с.
+
+dotnet test Dnd.slnx зелёный (1671). Живой прогон intent-rest-in-fiction × 3
+(deepseek-v4.1-flash, внешний оценщик qwen3.8-flash): 3/3 PASS — в каждой попытке
+модель вызывает TriggerRandomEncounter во время объявленного отдыха, новый гейт
+отклоняет вызов, flags.restRequested=true, flags.encounterDeclared=false,
+состояние exploration.
+
+---
+Source code is NOT published on GitHub.
+My code is hosted on a private server - this repository only reflects my working activity.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
