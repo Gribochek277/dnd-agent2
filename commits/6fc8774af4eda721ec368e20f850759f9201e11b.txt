@@ -1,0 +1,37 @@
+repository: serhii/dnd-agent2
+commit: 6fc8774af4eda721ec368e20f850759f9201e11b
+date: 2026-10-06T09:31:52+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: main
+
+message:
+calibrate(rubric): хеджированный вывод о скрытом — не no-false-certainty (ticket 15)
+Четвёртый приёмочный прогон (run-20261006-062003), npc-generated-by-tool —
+2/3: транскрипт 20261006062136-live.json честно хеджирует скрытое
+(«то ли на колене, то ли на чём-то ещё, отсюда не разобрать»), но внешний
+оценщик qwen3.8-flash снял no-false-certainty до 2. Тикет 14 починил сторону
+DM; здесь — сторона оценщика.
+
+- narration-rubric.md: калибровка C4 к no-false-certainty — наказывается
+  только плоское утверждение о непроверенном; хедж («отсюда не разобрать»,
+  «то ли … то ли …», «кажется…», «можно лишь гадать») — требуемое поведение
+  и не может уронить оценку ниже порога. Два якоря: unhedged-вывод о
+  внутреннем состоянии («привык ждать удара») — нарушение (ниже 3);
+  hedged-описание скрытого — норма (4–5, никогда 2). Отдельно: факт,
+  разрешённый инструментом в сцене (роль из GenerateNPC), — законное знание,
+  скрытые поля остаются скрытыми.
+- grader-prompt-narration.md: то же правило в контракте оценщика.
+- npc-generated-by-tool.yaml: авторская заметка праймит оценщика.
+- Покрытие: тест RubricPromptBuilderTests на оба якоря и правило в промпте.
+- docs/testing-spec.md §5 и CHANGELOG обновлены.
+
+dotnet test Dnd.slnx зелёный (1697). Живой прогон npc-generation-validity ×3
+(deepseek-v4.1-flash, внешний qwen3.8-flash, run-20261006-062704097): 3/3 PASS,
+no-false-certainty 5/5/5. Regrade того самого упавшего транскрипта новым
+рубриком: no-false-certainty 2 → 5 (trusted).
+
+---
+Source code is NOT published on GitHub.
+My code is hosted on a private server - this repository only reflects my working activity.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
