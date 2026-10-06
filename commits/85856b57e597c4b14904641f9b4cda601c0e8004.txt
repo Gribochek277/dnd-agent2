@@ -1,0 +1,33 @@
+repository: serhii/dnd-agent2
+commit: 85856b57e597c4b14904641f9b4cda601c0e8004
+date: 2026-10-06T04:53:36+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: main
+
+message:
+fix(evals): плоский ответ оценщика больше не валит trial (ticket 09)
+Живые прогоны показывали, что модель-оценщик (qwen3.8-flash) иногда
+отвечает плоским словарём измерений ({"coherent":5,...}) вместо
+контрактного {"dimensions":[...]}, и раннер записывал это как
+grader-error, хотя вердикт читается.
+
+- GraderVerdictReader (новый, IGraderVerdictReader) нормализует плоскую
+  форму и её варианты: словарь dimensions-объектом, значения-объекты с
+  score/na/evidence/note, числовые строки и целые вещественные, null -> na.
+  Envelope-ключи (dimensions, summary) не считаются измерениями.
+- GraderVerdictParser теперь только извлекает JSON из шумного ответа
+  (код-фенс, проза) и делегирует разбор формы ридеру; класс ужат с 283
+  до 86 строк по правилу ~200 строк.
+- RubricGradingRunner сопоставляет имена измерений без учёта регистра,
+  поэтому {"Coherent":4} больше не теряет coherent.
+
+Покрытие: 8 тестов парсера (плоский словарь, summary, null->na, строки и
+вещественные, значения-объекты, dimensions-объект, ошибки без score и с
+пустым словарём) + 2 теста раннера (плоский ответ даёт PASS без ретрая;
+регистр имени не ломает вердикт). dotnet test Dnd.slnx зелёный (1650).
+
+---
+Source code is NOT published on GitHub.
+My code is hosted on a private server - this repository only reflects my working activity.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
