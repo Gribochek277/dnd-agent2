@@ -1,0 +1,40 @@
+repository: serhii/dnd-agent2
+commit: 59e794d141a3c8cd74a345e28eae35daeaa7e3c1
+date: 2026-10-06T04:36:13+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: main
+
+message:
+fix(dm): loot grant is single-use per turn (ticket 06)
+A live combat-goblin-basic trial issued EndCombat/GrantLoot twice in one
+turn and the same gold was added again, and the narration described the
+outcome twice. The two existing repeat guards miss it: the consecutive
+streak (N = 3) and the pass-wide limit (M = 4) both need three/four
+identical calls, and both reset on a pass boundary.
+
+- New ITurnActionLedger/TurnActionLedger (Dnd.Core, DI singleton) records
+  actions that must apply at most once per turn.
+- ChatClientAgentStreamSource resets it once at the start of each turn,
+  so it survives that turn's corrective passes ("including different
+  passes") but not the next turn.
+- GrantLoot claims each granted item name and each gold amount as
+  separate case-insensitive (character, item) / (character, gold) keys,
+  atomically, before touching the inventory. A repeat is rejected with a
+  Rejected: result and nothing is added twice; even a grant the model
+  splits into (item+gold), (item), (gold) calls is caught. Different
+  grants and the same grant in a later turn still work.
+- EndCombat needs no ledger entry: the transition to Exploration already
+  rejects a repeat, and the ledger deliberately does not block ending a
+  genuinely new fight in the same turn.
+
+Coverage: tool tests (duplicate, split-subset, per-turn reset, different
+grants, EndCombat repeat) and stream-source tests (ledger persists across
+corrective passes, resets across turns). dotnet test Dnd.slnx green
+(1644 tests). Live combat-goblin-basic x3 (deepseek-v4.1-flash,
+external qwen3.8-flash grader): 3/3 PASS, matches-mechanical-outcome 5.
+
+---
+Source code is NOT published on GitHub.
+My code is hosted on a private server - this repository only reflects my working activity.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
