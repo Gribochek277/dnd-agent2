@@ -1,0 +1,33 @@
+repository: serhii/dnd-agent2
+commit: 6f9fa8f0ccbbc95659066df5da9f0b2740593b52
+date: 2026-10-06T09:17:35+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: main
+
+message:
+fix(dm): вывод о внутреннем состоянии NPC не выдаётся как факт (ticket 14)
+Третий приёмочный прогон (run-20261006-044611553), npc-generated-by-tool — 2/3.
+Оценщик наррации валил no-false-certainty (score 2): DM утверждал тактическую
+привычку NPC, выведенную из позы, как установленный факт («Судя по тому, как он
+сидит … этот человек привык ждать удара и не бросается первым»). Тикет 08 закрыл
+скрытые поля персоны; здесь другой случай — вывод о внутреннем из наблюдаемого.
+
+Правило зафиксировано в промпте и в рубрике оценщика:
+- PromptBuilder: контракт «Observable vs inferred» — поза, взгляд, одежда, голос
+  описываются уверенно; привычки, намерения, тактика, мотивы, выведенные из них,
+  подаются как впечатление (оговорка при самом выводе) или проверяются через
+  AssignDC → TriggerSave (Проницательность/Восприятие). Одного «судя по тому» мало,
+  если дальше идёт утверждение.
+- narration-rubric.md: no-false-certainty теперь явно называет выведенное
+  внутреннее состояние нарушением, а не только скрытый факт.
+- npc-generated-by-tool.yaml: авторская заметка для оценщика.
+
+Покрытие: prompt-rule тест + тест рубрики; dotnet test Dnd.slnx зелёный (1696).
+Живой прогон в этом окружении не выполнить (локальный llama.cpp не отвечает,
+freellmapi упирается в 413/429) — та же среда, что зафиксировал тикет 13.
+
+---
+Source code is NOT published on GitHub.
+My code is hosted on a private server - this repository only reflects my working activity.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
