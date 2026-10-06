@@ -1,0 +1,14 @@
+repository: serhii/dnd-agent2
+commit: e74c34fa067c314fe7607200d127aa58a654a66a
+date: 2026-10-06T12:23:02+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: main
+
+message:
+fix(playtest): состояние и Game Over — только с живого экрана, не из скроллбека
+
+---
+Source code is NOT published on GitHub.
+My code is hosted on a private server - this repository only reflects my working activity.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
