@@ -1,0 +1,27 @@
+repository: serhii/dnd-agent2
+commit: c4799ba4d940a08bc7841aa49cd12e74c420d87c
+date: 2026-10-06T03:59:12+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: ticket/05-social-action-in-combat-fake-kill
+
+message:
+fix(dm): a player's ability check never damages an enemy (ticket 05)
+A social reply in combat (no attack) could resolve as AssignDC(Wisdom) ->
+TriggerSave -> success -> ApplyDamage(enemy) with an invented cause ->
+EndCombat + XP: talking won the fight. Damage to an enemy now comes only
+from an attack or an explicit hazard in the fiction; an ability check or
+saving throw resolves uncertainty and never reduces HP.
+
+- CheckContext records a party member's resolved check for the turn
+  (TriggerSave) and DmAgent resets it at the start of every turn.
+- ApplyDamage rejects damage to an enemy while a player check is the
+  provenance; an enemy's save against a player's spell is untouched.
+- Prompt states the rule; ApplyDamage description warns the model.
+- Coverage: 7 component tests + a live social-action-in-combat scenario
+  + a prompt test. dotnet test Dnd.slnx green (1637 tests).
+
+---
+Source code is NOT published on GitHub.
+My code is hosted on a private server - this repository only reflects my working activity.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
