@@ -1,0 +1,33 @@
+repository: serhii/dnd-agent2
+commit: 3779a0724495319d0bdb70d47da7b01bf58a3e63
+date: 2026-10-06T11:06:17+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: main
+
+message:
+fix(combat): мёртвый враг не возвращается в бой — гейт и XP один раз (ticket 16)
+Завершённый бой переоткрывался тем же врагом: после EndCombat модель
+снова звала StartCombat с убитым гоблином, система возрождала его с
+полным HP, состояние возвращалось в combat, а победа оплачивалась второй
+раз (50 → 100 XP).
+
+- IGameStateContext: сессионный реестр побеждённых врагов
+  (DefeatedEnemies/RecordDefeatedEnemies/IsDefeatedEnemy, регистронезависимо).
+- ICombatState.GetDefeatedEnemyNames(); обе ветки завершения боя
+  (EndCombatTool и InputLoop.HandleCombatEnded) пишут мёртвых врагов в реестр
+  до очистки списка бойцов.
+- CombatStartService (оба входа) и DeclareEncounterTool отклоняют старт/
+  объявление с побеждённым врагом — включая системный фолбэк (#27), чтобы
+  атака по трупу не воскрешала его.
+- Сценарий enemy-declared-into-combat: досписан урон (1d12+3/1d12) и
+  повторена очередь 1d20, чтобы неоспрошенный бросок не уводил модель в петлю.
+
+Тесты: dotnet test Dnd.slnx — 1708 зелёных. Живой прогон
+(deepseek-v4.1-flash, внешний грейдер): safety-no-hang-after-victory 3/3,
+enemy-declared-into-combat 3/3.
+
+---
+Source code is NOT published on GitHub.
+My code is hosted on a private server - this repository only reflects my working activity.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
