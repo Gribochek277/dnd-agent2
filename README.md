@@ -1,7 +1,7 @@
 > Sanitized mirror of Forgejo `serhii/dnd-agent2`. Source code is not published here.
 >
 > Commit texts: `commits/`. Need the code? Email: sergeyalpatov1@gmail.com
-> Source: Forgejo `serhii/dnd-agent2` | Synced: 2026-10-06T13:59:01Z
+> Source: Forgejo `serhii/dnd-agent2` | Synced: 2026-10-06T16:45:01Z
 
 ---
 
@@ -133,6 +133,38 @@ paragraph-gap-happy model cannot flood the screen).
 
 See [`AGENTS.md`](AGENTS.md) for code rules (C#/.NET conventions, DI, SOLID, interfaces, project structure).
 See [`CONTEXT.md`](CONTEXT.md) for domain documentation and architecture decisions.
+
+## Campaign pilot (`make campaign-sim`)
+
+The long unattended hunt (testing spec §9): an AI player plays three authored Russian
+campaigns against the production DM, 40 turns each, while deterministic detectors and a
+periodic model check watch for catastrophes (integrity violations, knowledge leaks,
+tool/narration loops, soft-locks). It is a separate mode from the eval trials — a campaign
+run is not a scenario run.
+
+```bash
+# Full pilot: 3 campaigns × 3 repetitions × 40 turns (~10–12 h — run it overnight)
+make campaign-sim
+
+# Shorter smoke run: fewer repetitions (1–3) and/or fewer turns
+make campaign-sim RUNS=1 TURNS=10
+
+# Restrict the pilot to one authored seed
+make campaign-sim RUNS=1 TURNS=10 CAMPAIGN=mystery-black-teeth
+
+# Same command against the in-process stub (no model, seconds)
+make campaign-sim RUNS=1 TURNS=2 ARGS="--mode stub"
+```
+
+The authored seeds live in [`Dnd.Evals/Campaigns`](Dnd.Evals/Campaigns) — combat, social and
+mystery; each declares its hidden facts as a `secrets` list, the required input of the
+knowledge-leak detector. Artifacts are written under `reports/campaign-sim/` (git-ignored):
+
+- `reports/campaign-sim/<campaign-id>/<timestamp>/` — `turn-001.json … turn-040.json` world
+  snapshots plus `transcript.json` (the conversation, the tool calls and the run passport);
+- `reports/campaign-sim/pilot-<timestamp>/summary.md` — the one summary for the whole batch:
+  each campaign's `PASS`/`FAIL`/`ABORTED` verdict, every confirmed catastrophe (turn,
+  detector, evidence quote, snapshot path), the advisory findings and the time.
 
 ## Bundled SRD data
 

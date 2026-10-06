@@ -1,0 +1,23 @@
+repository: serhii/dnd-agent2
+commit: 45b2ccd157d6ce182c5984008ad55805bea3adec
+date: 2026-10-06T16:58:56+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: main
+
+message:
+feat(evals): кампанийный словарь типов и интерфейсов (ticket 17)
+Префакторинг перед слайсами 18-20 пилота кампаний (спека §9, решения #104):
+- модели Campaign: CampaignSeed, CampaignTurnRecord (+CampaignToolCall),
+  DetectorFinding + CatastropheKind, CampaignRunResult + CampaignRunMetadata,
+  контексты детекторов
+- интерфейсы IDetector, IPeriodicDetector, IAiPlayer, ICampaignSimLayout
+- раскладка reports/campaign-sim/<id>/<timestamp>/ (turn-NNN.json,
+  transcript.json, summary.md) + AddDndCampaignSim
+- строгий JSON-контракт: kebab-enum, unknown/missing CatastropheKind падает
+- тесты сериализации и раскладки; dotnet test Dnd.slnx зелёный
+
+---
+Source code is NOT published on GitHub.
+My code is hosted on a private server - this repository only reflects my working activity.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
