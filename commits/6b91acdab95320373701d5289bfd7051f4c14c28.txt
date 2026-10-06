@@ -1,0 +1,22 @@
+repository: serhii/dnd-agent2
+commit: 6b91acdab95320373701d5289bfd7051f4c14c28
+date: 2026-10-06T20:14:02+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: main
+
+message:
+fix(evals): внешний слот проверяющего доходит до кампанийной проверки (ticket 24)
+Кампанийный прогон с --grader-endpoint/--grader-model терял GraderSlotSettings
+по пути CLI → CampaignPilotSettings → CampaignRunnerSettings → EvalSettings →
+per-run контейнер, поэтому CampaignCheckerSlotResolver всегда падал в
+самопроверку и все периодические находки оставались advisory.
+
+Слот теперь протянут через все три хопа; DetectorFinding.checkerModel
+записывает модель проверяющего (и в справочной записи о сломанной проверке),
+сводка пилота показывает, кто проверял.
+
+---
+Source code is NOT published on GitHub.
+My code is hosted on a private server - this repository only reflects my working activity.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
