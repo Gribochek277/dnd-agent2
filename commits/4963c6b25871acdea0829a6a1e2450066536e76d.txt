@@ -1,0 +1,31 @@
+repository: serhii/dnd-agent2
+commit: 4963c6b25871acdea0829a6a1e2450066536e76d
+date: 2026-10-06T03:03:21+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: ticket/02-repeat-call-limit-per-pass
+
+message:
+feat(reliability): лимит одинаковых вызовов за пасс, не подряд (#142)
+Стрик N=3 считает только подряд идущие вызовы, поэтому живую осцилляцию
+A-B-A-B (до 15 вызовов в одном ходу, растянутых на 2-3 прохода) он не
+ловит, а лимит 8 на пасс не срабатывает: в каждом проходе меньше 8.
+ChatClientAgentStreamSource теперь дополнительно считает одинаковые
+завершённые вызовы (инструмент + нормализованные аргументы) по всему
+проходу без требования подряд и режет пасс на M-м повторе (M = 4 по
+умолчанию, конфигурируемо как стрик). Порог строго больше легитимной
+мультиатаки (до 3 одинаковых AttackRoll по одной цели), счётчик
+сбрасывается на границе прохода. Терминальный путь — как у стрика:
+пасс обрывается, ход заканчивается запасной репликой, отката нет;
+в диагностике отдельные RepeatedToolCallPass / ToolCallPassLimit.
+
+Тесты: срабатывание на M-м вызове при чередовании, ненаступление на
+3 одинаковых вызовах, сброс на границе пасса, настраиваемый M. Тест
+стрика DifferentCallInBetween_ResetsStreak осознанно поднимает лимит
+за пасс, чтобы изолировать стрик. dotnet test Dnd.slnx зелёный
+(1627 тестов).
+
+---
+Source code is NOT published on GitHub.
+My code is hosted on a private server - this repository only reflects my working activity.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
