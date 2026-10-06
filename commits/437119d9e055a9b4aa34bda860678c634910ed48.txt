@@ -1,0 +1,14 @@
+repository: serhii/dnd-agent2
+commit: 437119d9e055a9b4aa34bda860678c634910ed48
+date: 2026-10-06T05:55:10+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: ticket/12-fix-new-combat-scenario
+
+message:
+status: ticket 07 done
+
+---
+Source code is NOT published on GitHub.
+My code is hosted on a private server - this repository only reflects my working activity.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
