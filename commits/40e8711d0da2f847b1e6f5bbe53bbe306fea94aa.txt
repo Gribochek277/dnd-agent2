@@ -1,0 +1,14 @@
+repository: serhii/dnd-agent2
+commit: 40e8711d0da2f847b1e6f5bbe53bbe306fea94aa
+date: 2026-10-06T18:44:50+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: main
+
+message:
+Merge ticket 21: 21-campaign-pilot
+
+---
+Source code is NOT published on GitHub.
+My code is hosted on a private server - this repository only reflects my working activity.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
