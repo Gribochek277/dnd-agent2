@@ -1,0 +1,22 @@
+repository: serhii/dnd-agent2
+commit: 8219f506c7ec1b93161dc904bfec08665cf814ca
+date: 2026-10-06T03:11:09+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: ticket/02-repeat-call-limit-per-pass
+
+message:
+docs(reliability): разбор живого прогона #142 — осцилляции нет
+Живой прогон enemy-declared-into-combat на deepseek-v4.1-flash с
+внешним оценщиком qwen3.8-flash (1 одиночная + 3 suite-попытки):
+8-10 вызовов на ход, ни одна пара (инструмент, аргументы) не
+повторилась 4+ раз, реплики про лимит инструментов нет — осцилляция
+A-B-A-B не воспроизвелась, предохранитель не понадобился. Одна попытка
+упала на narration/dm-quality из-за системной реплики про
+неприменённое действие (недоскриптованные кубики #137), не из-за
+нового лимита. Детерминированные тесты и dotnet test Dnd.slnx зелёные.
+
+---
+Source code is NOT published on GitHub.
+My code is hosted on a private server - this repository only reflects my working activity.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
