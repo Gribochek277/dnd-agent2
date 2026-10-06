@@ -1,0 +1,25 @@
+repository: serhii/dnd-agent2
+commit: 45406bc778a46a96c0e553dd02dd1777960e2dfd
+date: 2026-10-06T07:44:06+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: main
+
+message:
+fix(dm): сгенерированный NPC не подменяется случайным монстром (ticket 13)
+GenerateNPC's catalog-first path fuzzy-resolved a DM-invented personal name
+to an unrelated monster: «Фендрик Лоза» → Lizard (token «лоза»/loza vs
+lizard at the 0.6 sequence-ratio cutoff), «Вернон Кожа» → Wyvern,
+«Ирвин Гальт» → Raven. The DM then narrated the human it had invented,
+so dm-quality/npc-in-character scored 1.
+
+IMonsterStatsCatalog gains TryGetStatsStrict: same resolution chain, but the
+fuzzy token pass accepts only a genuine one-edit near-miss. GenerateNPC uses
+it, so a personal name misses the catalog, goes to LLM generation and gets
+persona fields written to the campaign memory the DM voices the NPC from.
+Combat keeps the coercive TryGetStats chain (#100 gate).
+
+---
+Source code is NOT published on GitHub.
+My code is hosted on a private server - this repository only reflects my working activity.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
