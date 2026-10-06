@@ -1,0 +1,29 @@
+repository: serhii/dnd-agent2
+commit: 55e1536087e54cbfa579cd7da0481dd9f4a2d4bd
+date: 2026-10-06T03:06:43+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: ticket/04-watchdog-tool-execution
+
+message:
+fix(agent): выполнение инструмента не считается тишиной — сторож не обрывает длинный суб-запрос (ticket 04)
+Пока инструмент делает свою работу (GenerateNPC внутри выполняет
+вложенный LLM-вызов и идёт 50–90 с), внешний поток агента молчит, и
+сторож тишины (NoDataTimeout, 90 с) обрывал запрос: вложенный вызов
+падал с TaskCanceledException, ход заканчивался фолбэком.
+
+Окно тишины теперь приостанавливается на время исполнения инструмента
+(интервал между FunctionCallContent и его FunctionResultContent) и
+перезапускается с его результата, который сам является доказательством
+живости. Настоящая мёртвая/полуоткрытая SSE (тишина без выполняющегося
+инструмента) по-прежнему ловится: одна повторная попытка, затем запасная
+реплика. Таймаут хода остаётся backstop'ом на случай инструмента, который
+не вернулся.
+
+Тесты: инструмент дольше окна тишины → вызов завершается успешно (инструмент
+отработал, ретрая нет); тишина без вызова инструмента → одна повторная попытка.
+
+---
+Source code is NOT published on GitHub.
+My code is hosted on a private server - this repository only reflects my working activity.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
