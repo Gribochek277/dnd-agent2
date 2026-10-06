@@ -1,0 +1,14 @@
+repository: serhii/dnd-agent2
+commit: bb19db4a630c7c8f0ac0e92026370cae6a080c61
+date: 2026-10-06T17:30:31+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: main
+
+message:
+Merge ticket 20: 20-campaign-periodic-detector
+
+---
+Source code is NOT published on GitHub.
+My code is hosted on a private server - this repository only reflects my working activity.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
