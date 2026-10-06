@@ -1,0 +1,53 @@
+repository: serhii/dnd-agent2
+commit: 76a3001bfdc3f2f238980298f60cf6807c5a0b89
+date: 2026-10-06T07:16:44+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: main
+
+message:
+fix(dm): добыча и проверки требуют основания в ходу (ticket 11)
+Живые прогоны 2026-10-06 показали один класс: модель инициирует механику,
+которой в реплике игрока не было. narration-no-player-world-claims (2/3):
+игрок заявил «вчера я нашёл золотую монету», DM прокатил проверку и выдал
+монету — characters[Грибочек].gold 10 → 11. combat-goblin-basic (2/3):
+на ходу обыска тела вылезли AssignDC/TriggerSave/GrantLoot×2, и
+механический исход (проверка, Вдохновение, добыча) засорил наррацию
+(matches-mechanical-outcome 1).
+
+Починено в трёх слоях:
+
+- Классификатор (ITurnBasisClassifier/LlmTurnBasisClassifier, Dnd.Core,
+  ADR-0001, дешёвый вызов без thinking, fail-open): до хода читает реплику
+  игрока и решает три вопроса — просит ли она проверку/спасбросок, ищет ли
+  добычу, и является ли она ТОЛЬКО заявлением о мире.
+- Детерминированный гейт: вердикт живёт в turn-scoped
+  IMechanicBasisContext/MechanicBasisContext (Dnd.DM, DI-singleton),
+  который DmAgent сбрасывает в начале каждого хода (системные ходы —
+  permissive). GrantLoot отклоняет выдачу без основания (нет действия
+  игрока «поиск/взять/получить» и бой не завершён в этом ходу; EndCombat
+  записывает основание), AssignDC отклоняет ход, который только заявляет
+  факт, — заявление отказывается, а не подтверждается броском.
+- Промпт: правила основания для добычи и проверок, плюс две правки
+  наррации, которые потребовались живыми прогонами: один результат
+  инструмента — одно действие (никогда «снова»/«второй раз»/продолжение
+  удара), и разрешённый удар врага не описывается в ход игрока; milestone
+  XP не выдаётся за обычный бой, который система уже оплатила в EndCombat.
+
+Покрытие: 9 тестов классификатора (разбор, защита от противоречия
+assertionOnly+check, fail-open на пустом/битом/ошибке/таймауте, форма
+запроса), 7 тестов инструментов (добыча отклонена на ход-заявление без
+изменения золота/инвентаря, принята на поиск или завершённый бой, сброс
+основания по ходам; AssignDC отклонён/принят), тест основания EndCombat,
+2 теста проводки DmAgent и тест правил промпта. dotnet test Dnd.slnx
+зелёный (1688).
+
+Живые прогоны (deepseek-v4.1-flash, внешний qwen3.8-flash):
+narration-no-player-world-claims 3/3 PASS (золото остаётся 10, GrantLoot
+не вызывается), combat-goblin-basic 4/4 PASS с matches-mechanical-outcome 5,
+полный набор из 10 сценариев ×1 — 10/10 PASS без регрессий.
+
+---
+Source code is NOT published on GitHub.
+My code is hosted on a private server - this repository only reflects my working activity.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
