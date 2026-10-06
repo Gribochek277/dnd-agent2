@@ -1,0 +1,22 @@
+repository: serhii/dnd-agent2
+commit: 326d7069f3a0d0c1163efe0f8cc6cff2de9b22bb
+date: 2026-10-06T20:21:01+03:00
+author: agent <agent@example.com>
+branches: main
+
+message:
+feat(core): детерминированный страж дословных повторов наррации (ticket 22)
+Длинная кампания больше не деградирует в дословный повтор: стража применяет
+то же правило, что и кампанийный детектор (8-словные шинглы, >= 2 общих на
+одной из предыдущих 20 нарраций), внутри хода DM. ChatClientAgentStreamSource
+получает прежние наррации DM (recentNarrations) и перезапрашивает проход БЕЗ
+вызовов инструментов, повторяющий текст старого хода, называя повторённую
+фразу. Проход с инструментами не переигрывается (риск двойного применения
+состояния), после исчерпания корректирующих проходов наррация принимается.
+В системный промпт добавлено правило свежести длинной сессии.
+
+---
+Source code is NOT published on GitHub.
+My code is hosted on a private server - this repository only reflects my working activity.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
