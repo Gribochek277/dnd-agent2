@@ -1,0 +1,14 @@
+repository: serhii/dnd-agent2
+commit: 581c8f7c0466fd7810b4eb8330d64ee51ae306b6
+date: 2026-10-06T05:55:05+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: ticket/12-fix-new-combat-scenario
+
+message:
+Merge ticket 07: 07-rest-intent-vs-random-encounter
+
+---
+Source code is NOT published on GitHub.
+My code is hosted on a private server - this repository only reflects my working activity.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
