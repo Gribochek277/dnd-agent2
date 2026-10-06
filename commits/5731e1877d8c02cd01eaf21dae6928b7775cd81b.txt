@@ -1,0 +1,14 @@
+repository: serhii/dnd-agent2
+commit: 5731e1877d8c02cd01eaf21dae6928b7775cd81b
+date: 2026-10-06T05:14:23+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: main
+
+message:
+Merge ticket 09: 09-grader-flat-json-robustness
+
+---
+Source code is NOT published on GitHub.
+My code is hosted on a private server - this repository only reflects my working activity.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
