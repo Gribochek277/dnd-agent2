@@ -1,0 +1,14 @@
+repository: serhii/dnd-agent2
+commit: b16a91b05e65fc77c344e60326862c3e68ff56df
+date: 2026-10-06T03:42:10+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: main
+
+message:
+fix(playtest): драйвер выбирает действие по состоянию (боевая реплика в бою, социальная вне боя)
+
+---
+Source code is NOT published on GitHub.
+My code is hosted on a private server - this repository only reflects my working activity.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
