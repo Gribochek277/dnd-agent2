@@ -1,0 +1,35 @@
+repository: serhii/dnd-agent2
+commit: 05275e7ddf5966744a94ce28156237c78c75985e
+date: 2026-10-06T05:36:55+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: ticket/12-fix-new-combat-scenario
+
+message:
+fix(dm): отдых, объявленный в fiction-форме, доводится до Rest, а не в бой (ticket 07)
+Живой прогон intent-rest-in-fiction (2/3) показал две поломки: классификатор
+интента не распознавал отдых в свободной прозе («пора передохнуть» → other),
+поэтому flags.restRequested не выставлялся, а модель эскалировала дальний вой
+из сида в DeclareEncounter (flags.encounterDeclared=true) — бой по инициативе
+DM во время отдыха. Починено в трёх слоях:
+
+- Классификатор (LlmPlayerIntentClassifier): категория rest теперь описывает
+  fiction-отдых (спальник, лагерь, привал, «пора выспаться») конкретными
+  русскими примерами, а other явно исключает отдых. Замер на живой модели:
+  fiction-rest реплики 25/40 → 40/40, ложных срабатываний не прибавилось.
+- Детерминированный гейт: пока жив запрос на отдых (RestRequested),
+  DeclareEncounter и CombatStartService.TryStartCombat отклоняют модель
+  (DescribeRestCombatBlock). Отдых может прервать только реально выпавший
+  случайный энкаунтер (TriggerRandomEncounter → запись в ICheckContext,
+  сброс в BeginTurn); системный гарантированный вход в бой (атака игрока)
+  не блокируется.
+- Промпт: ход с объявленным отдыхом несёт <player_rest> и не требует
+  StartCombat.
+
+dotnet test Dnd.slnx зелёный (1648). Живой прогон intent-rest-in-fiction
+на локальной модели 3/3 PASS (restRequested=true, encounterDeclared не выставлен).
+
+---
+Source code is NOT published on GitHub.
+My code is hosted on a private server - this repository only reflects my working activity.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
