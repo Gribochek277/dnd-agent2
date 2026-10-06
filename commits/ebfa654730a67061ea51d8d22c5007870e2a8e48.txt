@@ -1,0 +1,14 @@
+repository: serhii/dnd-agent2
+commit: ebfa654730a67061ea51d8d22c5007870e2a8e48
+date: 2026-10-06T04:03:21+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: ticket/06-duplicate-endcombat-loot
+
+message:
+status: start ticket 06
+
+---
+Source code is NOT published on GitHub.
+My code is hosted on a private server - this repository only reflects my working activity.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
