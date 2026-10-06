@@ -1,0 +1,20 @@
+repository: serhii/dnd-agent2
+commit: 4891ae7cb621fabc14d16459203e38bed00e074a
+date: 2026-10-06T17:19:42+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: main
+
+message:
+feat(evals): детерминированные детекторы катастроф (ticket 19)
+Слайс B кампанийного пилота (спека §9, решения #104):
+- InvariantDetector переиспользует движок #115 на свежем состоянии хода;
+- ToolLoopDetector: одинаковые (инструмент, нормализованные аргументы) N=3 за ход;
+- NarrativeLoopDetector: пересечение 8-словных шинглов с наррациями прошлых 5–20 ходов;
+- CampaignCatastrophePolicy: любая подтверждённая катастрофа → FAIL, advisory не валит;
+- пороги конфигурируемы через CampaignDetectorSettings, DI-регистрация AddDndCampaignDetectors.
+
+---
+Source code is NOT published on GitHub.
+My code is hosted on a private server - this repository only reflects my working activity.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
