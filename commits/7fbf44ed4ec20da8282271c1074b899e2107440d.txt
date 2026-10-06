@@ -1,0 +1,14 @@
+repository: serhii/dnd-agent2
+commit: 7fbf44ed4ec20da8282271c1074b899e2107440d
+date: 2026-10-06T08:39:09+03:00
+author: Serhii <36171312+Gribochek277@users.noreply.github.com>
+branches: main
+
+message:
+status: start ticket 14
+
+---
+Source code is NOT published on GitHub.
+My code is hosted on a private server - this repository only reflects my working activity.
+README (if any) is available in the repo root.
+If you need the code, email: sergeyalpatov1@gmail.com
